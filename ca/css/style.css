@@ -5,9 +5,8 @@
 	box-sizing: border-box;
 }
 
-body {
+body { 
 	background: #f6f5f7;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -115,14 +114,6 @@ input {
 	z-index: 2;
 }
 
-@media (max-width: 550px) {
-	.sign-in-container {
-		width: 100%;
-	}
-	body {
-		background-image: url(../images/bg1x-p-1600.jpeg);
-	}
-  }
 
 .container.right-panel-active .sign-in-container {
 	transform: translateX(100%);
