@@ -20,9 +20,10 @@ html, body {
 }
 
 .login {
-  max-width: 280px;
+  max-width: 350px;
   min-height: 500px;
   margin: 30px auto;
+  padding: 1px 20px;
   background-color: rgba(10,10,10,.68);
 }
 
@@ -133,7 +134,7 @@ button {
   margin: 10px 20px 10px;
   font-weight: 700;
   color: #fff;
-  background-color: #22c08a;
+  background-color: #c01f3a;
   border: none;
   border-radius: 20px;
   transition: background-color .10s ease-in-out;
