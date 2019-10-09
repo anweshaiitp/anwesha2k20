@@ -59,7 +59,7 @@
     </div>
     <div class="call-to-action">
       <button id="login-button" type="submit">Sign Up</button>
-      <p>Already have an account ? <a href="./signup.html">Sign in now !!</a></p>
+      <p>Already have an account ? <a href="./signup.php">Sign in now !!</a></p>
     </div>
   </form>
   </div>

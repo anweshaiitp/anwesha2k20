@@ -191,7 +191,7 @@ h2.sub.header {
   overflow: hidden;
 }
 .progress-bar {
-  background: tint(#e45b6c, 20%);
+  background: #1f1f1f;
   min-height: 10px;
 }
 

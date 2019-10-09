@@ -1,15 +1,23 @@
 <?php 
     include("functions/init.php"); 
     if(!logged_in()){
-        redirect("reg.php");
+        redirect("signup.php");
     }
-    $anweshaid; $imgsrc;
+    $anweshaid; $imgsrc;$rank = 1;$hpoint;
     if(isset($_SESSION['anweshaid'])){
         $anweshaid = $_SESSION['anweshaid'];
         $imgsrc = $_SESSION['qrcode'];
         $access_token=$_SESSION['access_token'];
-    }
-    $data = ca_leaderboard();
+	}
+	$data = ca_leaderboard();
+	$hpoint = $data[0]['points'];
+	foreach($data as $ca){
+		if($ca['anweshaid'] == $anweshaid){
+			break;
+		}else{
+			$rank = $rank +1;
+		}
+	}
     $profile = user_details($anweshaid);
 ?>
 
@@ -33,8 +41,8 @@
 	<div class="card">
 		<section class="card-info card-section">
 			<!-- <i class="ion-navicon menu"></i> -->
-			<a style="color: #fff;" href="./index.html"><i class="ion-ios-home menu"></i></a>
-			<i class="ion-log-out search"></i>
+			<a style="color: #fff;" href="../../ca/ca.php"><i class="ion-ios-home menu"></i></a>
+			<a style="color: #fff;" href="./ca_logout.php"><i class="ion-log-out search"></i></a>
 			<div class="avatar row">
 			</div>
 
@@ -53,7 +61,7 @@
 						Rank
 					</h4>
 					<h3 class="statistic-value">
-						360
+						<?php echo $rank; ?>
 					</h3>
 				</article>
 
@@ -62,14 +70,14 @@
 						Score
 					</h4>
 					<h3 class="statistic-value">
-						1,034
+						<?php echo $profile['ca']['points']; ?>
 					</h3>
 				</article>
 			</section>
 
 			<div class="dial">
 				<h2 class="dial-title">
-					35
+				<?php echo $profile['ca']['points']/100; ?>
 				</h2>
 				<h3 class="dial-value">
 					Level
@@ -85,16 +93,20 @@
 			</nav>
 
 			<dl class="leaderboard">
+				<?php $i=0; foreach($data as $ca){
+					if($i>=5){break;}else $i = $i+1; ?>
 				<dt>
 					<article class="progress">
-						<section class="progress-bar" style="width: 85%;"></section>
+						<section class="progress-bar" style="width: <?php echo ($ca['points']*100)/$hpoint;?>%;"></section>
 					</article>
 				</dt>
 				<dd>
-					<div class="leaderboard-name">Bryan Smith</div>
-					<div class="leaderboard-value">20.123</div>
+					<div class="leaderboard-name"><?php echo $ca['first_name']." ".$ca['last_name']; ?></div>
+					<div class="leaderboard-value"><?php echo $ca['points']; ?></div>
 				</dd>
-				<dt>
+				<?php } ?>
+				
+				<!-- <dt>
 					<article class="progress">
 						<section class="progress-bar" style="width: 65%;"></section>
 					</article>
@@ -129,7 +141,7 @@
 				<dd>
 					<div class="leaderboard-name">Martin Geiger</div>
 					<div class="leaderboard-value">10.235</div>
-				</dd>
+				</dd> -->
 			</dl>
 		</section>
 	</div>

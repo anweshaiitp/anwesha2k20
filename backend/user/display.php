@@ -6,18 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Celesta2k19</title>
+    <title>Anwesha 2k20</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="./css/reg_styles.css">
+    <link href="./images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link href="./images/favicon.ico" rel="apple-touch-icon">
 </head>
 
-<body>
+<body style="background-image: url(./images/facts-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;">
     <canvas id="canvas"></canvas>
     <section class="login-body">
         <div class="row">
-            <div class="input-cart col s12 m10 push-m1 z-depth-2">
+            <div class="input-cart col s12 m10 push-m1 z-depth-2" style="color: #fff;">
             <?php display_message() ?>
             </div>
         </div>
@@ -27,9 +32,9 @@
             </a>
             <ul>
                 <li><a class="indigo center" href="../../">Home</a></li>
-                <li><a class="blue center" href="../../events.html">Events</a></li>
-                <li><a class="red center" href="../../sponsors.html">Sponsors</a></li>
-                <li><a class="red center" href="./reg.php">Login/Signup</a></li>
+                <li><a class="blue center" href="../../ca/ca.php">Campus Ambassador</a></li>
+                <!-- <li><a class="red center" href="../../sponsors.html">Sponsors</a></li> -->
+                <li><a class="red center" href="./signup.php">Login/Signup</a></li>
             </ul>
         </div>
     </section>
