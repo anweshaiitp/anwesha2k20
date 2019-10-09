@@ -43,18 +43,18 @@ function send_email($email,$subject,$msg,$headers){
 }
 
 //Function to generate random celestaID
-function getCelestaId(){
+function getAnweshaId(){
 	$exist=true;
 	while ($exist) {
-		$celestaid="CLST".mt_rand(1001,9999);
-		$exist=celestaid_exists($celestaid);
+		$anweshaid="ANW".mt_rand(1001,9999);
+		$exist=anweshaid_exists($anweshaid);
 	}
-	return $celestaid;
+	return $anweshaid;
 }
 
 //To check if the given username already exists or not
-function celestaid_exists($celestaid){
-	$sql="SELECT id FROM users WHERE celestaid='$celestaid'";
+function anweshaid_exists($anweshaid){
+	$sql="SELECT id FROM users WHERE anweshaid='$anweshaid'";
 	$result=query($sql);
 	if(row_count($result)==1){
 		return true;

@@ -52,12 +52,13 @@
         <input class="white-text input" required type="password" placeholder="Confirm Password" name="confirm_password" id="confirm_password" />
       </div>
       <div class="gender-row row">
-        <input class="rdo" type="radio" value="m"  name="gender">Male</input><br><br>
-        <input class="rdo" type="radio" value="f"  name="gender">Female</input> 
+        <input class="rdo" type="radio" value="m"  name="gender" required>Male</input><br><br>
+        <input class="rdo" type="radio" value="f"  name="gender">Female</input> <br><br>
+        <input class="rdo" type="radio" value="other"  name="gender">Other</input> 
       </div>
     </div>
     <div class="call-to-action">
-      <button id="login-button" type="button">Sign Up</button>
+      <button id="login-button" type="submit">Sign Up</button>
       <p>Already have an account ? <a href="./signup.html">Sign in now !!</a></p>
     </div>
   </form>

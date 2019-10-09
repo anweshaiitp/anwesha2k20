@@ -69,7 +69,7 @@ function email_exists($email){
 
 // To check if the user exists or not
 function refrral_id_exist($referral_id){
-	$sql = "SELECT id, active FROM ca_users WHERE celestaid ='".$referral_id."'";
+	$sql = "SELECT id, active FROM ca_users WHERE anweshaid ='".$referral_id."'";
 	$result = query($sql);
 	if(row_count($result)==1){
 		$row=fetch_array($result);
@@ -84,9 +84,9 @@ function refrral_id_exist($referral_id){
 }
 
 //Attaching the qr code generator
-function generateQRCode($celestaid,$first_name,$last_name){
+function generateQRCode($anweshaid,$first_name,$last_name){
 	include("qrCodeGenerator/qrlib.php");
-	QRcode::png($celestaid."/".$first_name."/".$last_name,"assets/qrcodes/".$celestaid.".png","H","10","10");
+	QRcode::png($anweshaid."/".$first_name."/".$last_name,"assets/qrcodes/".$anweshaid.".png","H","10","10");
 }
 
 /*************************Calling API Functions**************************/
@@ -161,8 +161,8 @@ function login_signup(){
 	 		$errors[]="Your password fields didn't match";
 		 }
 		 
-		 if(strlen($referral_id)!=8){
-			 $referral_id ="CLST1504";
+		 if(strlen($referral_id)!=7){
+			 $referral_id ="ANW1504";
 		 }
 
 	 	if(email_exists($email)){
@@ -263,29 +263,29 @@ function ca_register($first_name, $last_name, $phone, $college, $email, $passwor
 		return false;
 	}else{
 		$password=md5($password);
-		$celestaid=getCelestaId();
-		$validation_code=md5($celestaid+microtime());
-		generateQRCode($celestaid,$first_name,$last_name);
-		$qrcode="https://celesta.org.in/backend/user/assets/qrcodes/".$celestaid.".png";
+		$anweshaid=getAnweshaId();
+		$validation_code=md5($anweshaid+microtime());
+		generateQRCode($anweshaid,$first_name,$last_name);
+		$qrcode="https://anwesha.info/backend/user/assets/qrcodes/".$anweshaid.".png";
 
 		//CONTENTS OF EMAIL
-		$subject="Activate Celesta Account";
+		$subject="Activate Anwesha Account";
 		$msg="<p>
-		You have successfully registered as a Campus Ambassador in Celesta-2k19. Please verify your account to get the details.
+		You have successfully registered as a Campus Ambassador in Anwesha-2k20. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
-			<a href='https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19'>https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19</a>
+			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19</a>
 			</p>
 		";
 		$header="From: noreply@yourwebsite.com";
 		//Added to database if mail is sent successfully
 		if(send_email($email,$subject,$msg,$header)){
-			$sql="INSERT INTO users(first_name,last_name,phone,college,email,password,validation_code,active,celestaid,qrcode,gender) ";
-			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$celestaid','".$qrcode."','$gender')";
+			$sql="INSERT INTO users(first_name,last_name,phone,college,email,password,validation_code,active,anweshaid,qrcode,gender) ";
+			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$anweshaid','".$qrcode."','$gender')";
 			$result=query($sql);
 			confirm($result);
 
-			$sql="INSERT INTO ca_users(first_name,last_name,phone,college,email,password,validation_code,active,celestaid,qrcode,gender) ";
-			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$celestaid','".$qrcode."','$gender')";
+			$sql="INSERT INTO ca_users(first_name,last_name,phone,college,email,password,validation_code,active,anweshaid,qrcode,gender) ";
+			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$anweshaid','".$qrcode."','$gender')";
 			$result=query($sql);
 			confirm($result);
 
@@ -313,30 +313,30 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 		return false;
 	}else{
 		$password=md5($password);
-		$celestaid=getCelestaId();
-		$validation_code=md5($celestaid+microtime());
-		generateQRCode($celestaid,$first_name,$last_name);
-		// $qrcode="http://localhost:8888/Celesta2k19-Webpage/backend/user/assets/qrcodes/".$celestaid.".png";
-		$qrcode="https://celesta.org.in/backend/user/assets/qrcodes/".$celestaid.".png";
+		$anweshaid=getAnweshaId();
+		$validation_code=md5($anweshaid+microtime());
+		generateQRCode($anweshaid,$first_name,$last_name);
+		// $qrcode="http://localhost:8888/Celesta2k19-Webpage/backend/user/assets/qrcodes/".$anweshaid.".png";
+		$qrcode="https://anwesha.info/backend/user/assets/qrcodes/".$anweshaid.".png";
 
 		//CONTENTS OF EMAIL
-		$subject="Activate Celesta Account";
+		$subject="Activate Anwesha Account";
 		$msg="<p>
-		You have successfully created a Celesta Account. Please verify your account to get the details.
+		You have successfully created a Anwesha Account. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
-			<a href='https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code'>https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code</a>
+			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code</a>
 			</p>
 		";
 		$header="From: noreply@yourwebsite.com";
 		//Added to database if mail is sent successfully
 		if(send_email($email,$subject,$msg,$header)){
 			if(!refrral_id_exist($referral_id)){
-				$referral_id="CLST1504";
+				$referral_id="ANW1504";
 			}
 			update_referral_points($referral_id);
 
-			$sql="INSERT INTO users(first_name,last_name,phone,college,email,password,validation_code,active,celestaid,qrcode,gender, ca_referral) ";
-			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$celestaid','".$qrcode."','$gender','$referral_id')";
+			$sql="INSERT INTO users(first_name,last_name,phone,college,email,password,validation_code,active,anweshaid,qrcode,gender, ca_referral) ";
+			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$anweshaid','".$qrcode."','$gender','$referral_id')";
 			$result=query($sql);
 			confirm($result);
 
@@ -350,14 +350,14 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 
 // Add referral points
 function update_referral_points($referral_id){
-	$sql = "SELECT excitons FROM ca_users WHERE celestaid='$referral_id'";
+	$sql = "SELECT points FROM ca_users WHERE anweshaid='$referral_id'";
 	$result = query($sql);
 	if(row_count($result)==1){
 		$row=fetch_array($result);
-		$points=$row['excitons'];
-		$points = $points + 10;
+		$points=$row['points'];
+		$points = $points + 50;
 
-		$sql1 = "UPDATE ca_users SET excitons=$points WHERE celestaid='$referral_id'";
+		$sql1 = "UPDATE ca_users SET points=$points WHERE anweshaid='$referral_id'";
 		$result1 = query($sql1);
 		confirm($result1);
 	}
@@ -370,7 +370,7 @@ function activate_user(){
 			echo $email=clean($_GET['email']);
 			echo $validation_code=clean($_GET['code']);
 
-			$sql="SELECT id, celestaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
+			$sql="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 			$result=query($sql);
 			confirm($result);
 
@@ -381,7 +381,7 @@ function activate_user(){
 				
 				// Fetching details
 				$row=fetch_array($result);
-				$celestaid=$row['celestaid'];
+				$anweshaid=$row['anweshaid'];
 				$qrcode=$row['qrcode'];
 				$is_ca=false;
 				$first_name=$row['first_name'];
@@ -403,25 +403,25 @@ function activate_user(){
 					}
 				}
 
-				$subject="Celesta Account Details";
+				$subject="Anwesha Account Details";
 
 				$header="From: noreply@yourwebsite.com";
 
 				if($is_ca==true){
-					set_message("<p class='bg-success'> Your account has been activated.<br> Your celestaid is <b>$celestaid</b>. Your ca referral id is: <b>$celestaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
+					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. Your ca referral id is: <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
 					$msg="<p>
 					Hi $first_name, you have successfully completed your CA registration process.<br>
-					Your celestaid is : <b>$celestaid</b><br>
-					Your referral id is: <b>$celestaid</b><br>
+					Your anweshaid is : <b>$anweshaid</b><br>
+					Your referral id is: <b>$anweshaid</b><br>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
 					</p>
 					";
 				}else{
-					set_message("<p class='bg-success'> Your account has been activated.<br> Your celestaid is <b>$celestaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
+					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
 					$msg="<p>
-					Hi $first_name, you have successfully created a Celesta Account.<br>
-					Your celestaid is : <b>$celestaid</b><br>
+					Hi $first_name, you have successfully created a Anwesha Account.<br>
+					Your anweshaid is : <b>$anweshaid</b><br>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
 					</p>
@@ -446,13 +446,13 @@ function activate_user(){
 function validate_user_login(){
 	$errors=[];
 	if($_SERVER['REQUEST_METHOD']=="POST"){
-		$celestaid=clean($_POST['celestaid']);
+		$anweshaid=clean($_POST['anweshaid']);
 		$password=clean($_POST['password']);
 		$remember=isset($_POST['remember']);
 
 		//Listing down possible errors
-		if(empty($celestaid)){
-			$errors[]="Celesta ID field cannot be ampty.";
+		if(empty($anweshaid)){
+			$errors[]="Anwesha ID field cannot be empty.";
 		}
 
 		if(empty($password)){
@@ -466,7 +466,7 @@ function validate_user_login(){
 			}
 			return json_encode(array_merge(array("404"),$errors));
 		}else{
-			if(login_user($celestaid,$password,$remember)){
+			if(login_user($anweshaid,$password,$remember)){
 				redirect("profile.php");
 				return json_encode(array("400"));//User logged in
 			}else{
@@ -479,9 +479,9 @@ function validate_user_login(){
 }
 
 //Log in the user
-function login_user($celestaid, $password, $remember){
+function login_user($anweshaid, $password, $remember){
 
-	$sql = "SELECT password, id, qrcode, active FROM users WHERE celestaid ='".escape($celestaid)."' AND active=1";
+	$sql = "SELECT password, id, qrcode, active FROM users WHERE anweshaid ='".escape($anweshaid)."' AND active=1";
 
 	$result=query($sql);
 	if(row_count($result)==1){
@@ -490,19 +490,19 @@ function login_user($celestaid, $password, $remember){
 		$db_password=$row['password'];
 		$qrcode=$row['qrcode'];
 		if(md5($password)==$db_password){
-			$access_token=$celestaid.$password.microtime();
+			$access_token=$anweshaid.$password.microtime();
 			$access_token=md5($access_token);
 
-			$sql1="UPDATE users SET access_token='$access_token' WHERE celestaid='$celestaid'";
+			$sql1="UPDATE users SET access_token='$access_token' WHERE anweshaid='$anweshaid'";
 			$result1 = query($sql1);
-			$_SESSION['celestaid']=$celestaid;	//Storing the celesta id in a session
+			$_SESSION['anweshaid']=$anweshaid;	//Storing the anwesha id in a session
 			$_SESSION['qrcode']=$qrcode;
 			$_SESSION['access_token']=$access_token;
 
 			if($remember=="on"){
-				 setcookie('celestaid',$celestaid, time() + 86400);
+				 setcookie('anweshaid',$anweshaid, time() + 86400);
 				 setcookie('qrcode',$qrcode,time()+86400);
-				 setcookie('access_token',$celestaid, time()+86400);
+				 setcookie('access_token',$anweshaid, time()+86400);
 			}
 			return true;
 		}else{
@@ -518,7 +518,7 @@ function login_user($celestaid, $password, $remember){
 
 //Logged in functions
 function logged_in(){
-	if(isset($_SESSION['celestaid'])){
+	if(isset($_SESSION['anweshaid'])){
 		return true;
 	}
 	else{
@@ -534,24 +534,24 @@ function recover_password(){
 			$email=clean($_POST['email']);
 			if(email_exists($email)){
 
-				$sql="SELECT celestaid FROM users WHERE email='".$email."' ";
+				$sql="SELECT anweshaid FROM users WHERE email='".$email."' ";
 				$result=query($sql);
 				
 				confirm($result);
 				$row=fetch_array($result);
-				$celestaid=$row['celestaid'];
+				$anweshaid=$row['anweshaid'];
 				
-				$validation_code=md5($email+$celestaid+microtime());
+				$validation_code=md5($email+$anweshaid+microtime());
 				setcookie('temp_access_code',$validation_code,time()+ 600 );
 
 				$sql1="UPDATE users SET validation_code='".$validation_code."' WHERE email='".escape($email)."' ";
 				$result1= query($sql1);
 				confirm($result1); 
 
-				$subject = "Please reset your Celesta ID password.";
-				$message = "<p>Your celesta id is: {$celestaid}.<br/>
+				$subject = "Please reset your Anwesha ID password.";
+				$message = "<p>Your anwesha id is: {$anweshaid}.<br/>
 					Your password reset code is {$validation_code} <br/>
-					Click here to reset your password https://celesta.org.in/backend/user/code.php?email=$email&code=$validation_code </p>";
+					Click here to reset your password https://anwesha.info/backend/user/code.php?email=$email&code=$validation_code </p>";
 				$header="From: noreply@yourwebsite.com";
 				if (send_email($email,$subject,$message,$header)){
 					echo "Email sent";
@@ -707,11 +707,11 @@ function ca_leaderboard(){
 	return $data;
 }
 
-function user_details($celestaid){
-	$sql="SELECT * FROM users WHERE celestaid='".escape($celestaid)."' ";
+function user_details($anweshaid){
+	$sql="SELECT * FROM users WHERE anweshaid='".escape($anweshaid)."' ";
 	$result=query($sql);
 	$data = fetch_array($result);
-	$sql2="SELECT * FROM ca_users WHERE celestaid='".escape($celestaid)."' ";
+	$sql2="SELECT * FROM ca_users WHERE anweshaid='".escape($anweshaid)."' ";
 	$result2=query($sql2);
 	if(row_count($result2)==1){
 		$data['isCA']=true;
