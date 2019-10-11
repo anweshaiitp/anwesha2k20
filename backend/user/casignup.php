@@ -1,4 +1,6 @@
-<?php include("functions/init.php"); ?>
+<?php include("functions/init.php");
+  redirect("../../comingsoon");
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>

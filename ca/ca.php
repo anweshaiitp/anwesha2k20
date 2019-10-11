@@ -4,6 +4,7 @@
     if(logged_in()){
         $loggedIn = true;
     }
+    redirect("../comingsoon");
 ?>
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->

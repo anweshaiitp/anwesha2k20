@@ -5,6 +5,7 @@
 if (logged_in()) {
     redirect("profile.php");
 }
+redirect("../../comingsoon");
 ?>
 <head>
     <meta charset="UTF-8">

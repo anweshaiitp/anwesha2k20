@@ -27,6 +27,17 @@ h1 {
      margin: 0;
 }
 
+.ca {
+     font-family: Poppins;
+     text-transform: uppercase;
+     color: #fff;
+     text-align: center;
+     font-size: 24px;
+     letter-spacing: 15px;
+     line-height: 50px;
+     margin: 0;
+}
+
 @media only screen and (max-width: 768px) {
      h1 {
           font-size: 20px;
