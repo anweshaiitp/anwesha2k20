@@ -5,28 +5,6 @@ session_start();
 include('db.php');
 include('utility.php');
 
-/** Return value parameters
- * Sample registration response:
- * {
- * 'status': 400,
- * 'message':{
- *              "Email already exists",
- *              "Username less then 3 letters",
- *           }
- * }
- * 
- * Status code values:
- *  400: Registration failed because of wrong inputs
- *  401: Registration failed because of failing to send email
- *  402: Account activation failed
- *  403: Login failed
- *  404: Cannot be checked in or checked out
- *  200: Registration succesfull
- *  201: Activated the celesta id
- *  202: Logged in succefully
- *  203: Succesfully checked in
- */
-
 /** Pass a parameter with f and set value to it
  * Set f=register_user, to perform registration
 */
@@ -34,8 +12,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['f'])){
         if($_POST['f']=='register_user'){
             user_registration();
-        }elseif($_POST['f']=='activate_user'){
-            activate_user();
         }elseif($_POST['f']=='login_user'){
             login_user();
         }elseif($_POST['f']=='checkin_checkout'){
@@ -44,6 +20,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             profile();
         }elseif($_POST['f']=='logout_user'){
             logout_user();
+        }elseif($_POST['f']=="resend_activation_link"){
+            resendActivationLink();
         }
     }
 }
@@ -145,7 +123,7 @@ function user_registration(){
         }
         //After check perform the task.
         if(!empty($errors)){
-            $response['status']='400';
+            $response['status']=400;
             $response['message']=$errors;
             echo json_encode($response);
         }else{
@@ -159,18 +137,17 @@ function user_registration(){
 
             $password=md5($password);
             $celestaid=getCelestaId();
-            $validation_code=mt_rand(10001,99999);
+            $validation_code=md5(mt_rand(10001,99999).microtime());
             generateQRCode($celestaid,$first_name,$last_name);
             $qrcode="https://celesta.org.in/backend/user/assets/qrcodes/".$celestaid.".png";
 
             //Composing the email
             $subject="Activate Celesta Account";
             $msg="<p>
-                Your Celesta Id is ".$celestaid.". <br/>
-                You qr code is <img src='$qrcode'/> <a href='$qrcode'>click here</a><br/>
-
-                Your validation code is: $validation_code<br>
-                Enter this code in the app to activate your account.
+                Thank you for creating Celesta Account. Please click the link below to activate your account. <br/>
+                
+                 <a href='https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code'>https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code</a>
+                <br/>Note: You can login once you have activated your account
                 </p>
             ";
             $header="From: noreply@yourwebsite.com";
@@ -187,16 +164,16 @@ function user_registration(){
                 confirm($result);
 
                 //Setting the JSON ready for sending the response
-                $message['celestaid']=$celestaid;
-                $message['qrcode']=$qrcode;
+                $message[]="Successfully created the account";
                 // $message['validation_code']=$validation_code;
 
-                $response['status']='200';
+                $response['status']=200;
                 $response['message']=$message;
                 echo json_encode($response);
             }else{
-                $response['status']='400';
-                $response['message']="Failed to send the email for verification";
+                $response['status']=400;
+                $errors[]="Failed to send the email for verification";
+                $response['message']=$errors;
                 echo json_encode($response);
             }
         }//After check else part closing
@@ -218,61 +195,120 @@ function update_referral_points($referral_id){
 	}
 }
 
-//Activate the user
-function activate_user(){
-    $response=array();
-    $errors=array();
-    $message=array();
-    $celestaid=$_POST['celestaid'];
-    $got_validation_code=$_POST['validation_code'];
 
-    //fetching validation code from the database for the particular celstaid
-    $sql="SELECT validation_code,email,qrcode FROM users WHERE celestaid='$celestaid'";
-    $result=query($sql);
-    
-    if(row_count($result)==1){
-        $row=fetch_array($result);
-        $validation_code=$row['validation_code'];
-        $email=$row['email'];
-        $qrcode=$row['qrcode'];
+// Resend Activation Link
+function resendActivationLink(){
+	if($_SERVER['REQUEST_METHOD']=="POST"){
+		$email=escape($_POST['email']); // Email id of the user
+		$sql="SELECT active,id, validation_code,celestaid FROM users WHERE email='$email'";
+		$result=query($sql);
+		confirm($result);
 
-        if($validate_code==$got_validation_code){
-            $sql="UPDATE users SET active=1 WHERE celestais='$celestaid'";
-            $result=query($sql);
-            $confirm($result);
+		$response=array();
+		$message=array();
 
-            #writing the response
-            $message[]="Your celestaid: $celestaid has been succesfully activated.";
-            $response['status']='201';
-            $response['message']=$message;
-            echo json_encode($response);
+		if(row_count($result)==1){
+			$row=fetch_array($result);
+			$active=$row['active'];
 
-            //Composing the email
-            $subject="Activated Celesta Account";
-            $msg="<p>
-                Your Celesta Id ".$celestaid." has been succesfully activated. <br/>
-                You can now login in the app or web.
-                You qr code is <img src='$qrcode'/> <a href='$qrcode'>click here</a><br/>
-                </p>
-            ";
-            $header="From: noreply@yourwebsite.com";
-            send_email($email,$subject,$msg,$header);
+			if($active==1){
+				$message[]="Account already activated.";
+				$response['status']=208;
+			}else{
+				$celestaid=$row['celestaid'];
+				$validation_code=md5($celestaid.microtime());
+				$sql1="UPDATE users SET validation_code='$validation_code' WHERE email='$email'";
+				$result1=query($sql1);
+				confirm($result1);
+				$activation_link="https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code";
+
+				if(isUserCA($email)){
+					$sql2="UPDATE ca_users SET validation_code='$validation_code' where email='$email'";
+					$result2=query($sql2);
+					$activation_link="https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19";
+				}
+
+				$subject="Re-Activation Link";
+				$msg="<p>
+				Please click the link below to activate your celesta account and login.<br/>
+					<a href='$activation_link'>$activation_link</a>
+					</p>
+				";
+				$header="From: noreply@yourwebsite.com";
+				send_email($email,$subject,$msg,$header);
+				$message[]="Successfully resend the verification link";
+				$response['status']=200;
+			}
+		}else{
+			$message[]="Email not found.";
+			$response['status']=404;
+		}
+
+		$response['message']=$message;
+		echo json_encode($response);
+	}
+}
+
+// //Activate the user
+// function activate_user(){
+//     $response=array();
+//     $errors=array();
+//     $message=array();
+//     $email=$_GET['email'];
+//     $celestaid=$_GET['celestaid'];
+//     $got_validation_code=$_GET['validation_code'];
+//     // echo "Reached -".$got_validation_code."<br/>";
+
+//     //fetching validation code from the database for the particular celstaid
+//     $sql="SELECT validation_code,email,qrcode FROM users WHERE celestaid='$celestaid' and email='$email'";
+//     $result=query($sql);
+//     confirm($result);
+
+//     if(row_count($result)==1){
+//         $row=fetch_array($result);
+//         $validation_code=$row['validation_code'];
+//         $qrcode=$row['qrcode'];
+
+//         if($got_validation_code==$got_validation_code){
+//             $sql="UPDATE users SET active=1,validation_code='' WHERE celestaid='$celestaid'";
+//             $result=query($sql);
+//             $confirm($result);
+
+//             #writing the response
+//             $message[]="Your celestaid: $celestaid has been successfully activated.";
+//             $response['status']='201';
+//             $response['message']=$message;
+//             $response['celestaid']=$celestaid;
+//             $response['qrcode']=$qrcode;
+            
+
+//             //Composing the email
+//             $subject="Activated Celesta Account";
+//             $msg="<p>
+//                 Your Celesta Id ".$celestaid." has been succesfully activated. <br/>
+//                 You can now login in the app or web.
+//                 You qr code is <img src='$qrcode'/> <a href='$qrcode'>click here</a><br/>
+//                 </p>
+//             ";
+//             $header="From: noreply@yourwebsite.com";
+//             send_email($email,$subject,$msg,$header);
+//             echo json_encode($response);
 
 
-        }else{
-            $errors[]="The validation code that you entered is wrong.";
-            $response['status']='402';
-            $response['message']=$errors;
-            echo json_encode($response);
-        }
-    }else{
-        //Will write r=the response code later
-        $errors[]="Following Celesta ID have not been registered yet.";
-        $response['status']='402';
-        $response['message']=$errors;
-        echo json_encode($response);
-    }
-}//User account activation
+//         }else{
+//             $errors[]="The validation code that you entered is wrong.";
+//             $response['status']='402';
+//             $response['message']=$errors;
+//             echo json_encode($response);
+//         }
+//     }else{
+//         //Will write r=the response code later
+//         $errors[]="Following Celesta ID have not been registered yet.";
+//         $response['status']='402';
+//         $response['message']=$errors;
+//         echo json_encode($response);
+//     }
+// }//User account activation
 
 //Login function
 function login_user(){
@@ -293,7 +329,7 @@ function login_user(){
 
             if($active!=1){
                 $errors[]="Your account is not activated. Please activate your account to login.";
-                $response['status']='403';//Login failed
+                $response['status']=403;//Login failed
                 $response['message']=$errors;
                 echo json_encode($response);
             }else{
@@ -304,31 +340,21 @@ function login_user(){
                 $result1 = query($sql1);
 
                 $first_name=$row['first_name'];
-                $last_name=$row['last_name'];
-                $email=$row['email'];
                 $qrcode=$row['qrcode'];
                 $celestaid=$row['celestaid'];
-                $events_registered=$row['events_registered'];
-                $events_participated=$row['events_participated'];
-                $phone=$row['phone'];
     
-                $response['status']='202';//Login validated
-                $message['celestaid']=$celestaid;
-                $message['first_name']=$first_name;
-                $message['last_name']=$last_name;
-                $message['email']=$email;
-                $message['phone']=$phone;
-                $message['qrcode']=$qrcode;
-                $message['events_registered']=$events_registered;
-                $message['events_participated']=$events_participated;
-                $message['access_token']=$access_token;
+                $response['status']=202;//Login validated
                 $response['message']=$message;
+                $response['celestaid']=$celestaid;
+                $response['access_token']=$access_token;
+                $response['first_name']=$first_name;
+                $response['qrcode']=$qrcode;
                 echo json_encode($response);
             }//Else part of active
             
         }else{
             $errors[]="Invalid credentials.";
-            $response['status']='403';//Login failed
+            $response['status']=403;//Login failed
             $response['message']=$errors;
             echo json_encode($response);
         }
@@ -375,113 +401,48 @@ function profile(){
         if(row_count($result)==1){
             $row=fetch_array($result);
 
-                $first_name=$row['first_name'];
-                $last_name=$row['last_name'];
-                $email=$row['email'];
-                $qrcode=$row['qrcode'];
-                $celestaid=$row['celestaid'];
-                $events_registered=$row['events_registered'];
-                $events_participated=$row['events_participated'];
-                $phone=$row['phone'];
-    
-                $response['status']='202';// Profile access validated
-                $message['celestaid']=$celestaid;
-                $message['first_name']=$first_name;
-                $message['last_name']=$last_name;
-                $message['email']=$email;
-                $message['phone']=$phone;
-                $message['qrcode']=$qrcode;
-                $message['events_registered']=$events_registered;
-                $message['events_participated']=$events_participated;
-                $message['access_token']=$access_token;
-                $response['message']=$message;
-                echo json_encode($response);
-            
+            $first_name=$row['first_name'];
+            $last_name=$row['last_name'];
+            $email=$row['email'];
+            $qrcode=$row['qrcode'];
+            $celestaid=$row['celestaid'];
+            $events_registered=$row['events_registered'];
+            $events_participated=$row['events_participated'];
+            $phone=$row['phone'];
+
+            $response['status']=202;// Profile access validated
+            $message['celestaid']=$celestaid;
+            $message['first_name']=$first_name;
+            $message['last_name']=$last_name;
+            $message['email']=$email;
+            $message['phone']=$phone;
+            $message['qrcode']=$qrcode;
+            $message['events_registered']=$events_registered;
+            $message['events_participated']=$events_participated;
+            $message['access_token']=$access_token;
+            $message['amount_paid']=$row['amount_paid'];
+            $response['profile']=$message;
+
+            $sql1="SELECT ev_id, ev_amount FROM events";
+            $result1=query($sql1);
+            $events=array();
+            if ($result1->num_rows > 0) {
+                while($row1 = $result1->fetch_assoc()) {
+                    $event=array();
+                    $event['ev_id']=$row1['ev_id'];
+                    $event['ev_amount']=$row1['ev_amount'];
+                    $events[]=$event;
+                }
+            }
+            $response['events']=$events;
+            echo json_encode($response);
+
         }else{
             $errors[]="Invalid access token. Unauthorized to access the data.";
-            $response['status']='403';// Unauthorized access
+            $response['status']=403;// Unauthorized access
             $response['message']=$errors;
             echo json_encode($response);
         }
     }
 
 }
-
-
-
-
-/************************************************** Admin App starts *********************************************************/
-
-//CheckinCheckout
-function checkin_checkout(){
-        $response=array();
-        $message=array();
-        $toadd=array();
-        $last_row=array();
-        $checkin_checkout=array();
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        $celestaid=clean($_POST['celestaid']);
-        $date_time=clean($_POST['date_time']);
-
-        $sql="SELECT checkin_checkout,active FROM present_users WHERE celestaid='$celestaid'";
-        $result=query($sql);
-
-        if(row_count($result)==1){
-            $row=fetch_array($result);
-            $active=$row['active'];
-            if($active!=1){
-                $response['status']='404';
-                $message[]="Account is not yet active. You have not yet registered in the registration desk.";
-            }else{
-                $checkin_checkout=json_decode($row['checkin_checkout']);
-                if(!empty($checkin_checkout)){
-                    $reverse_data=$checkin_checkout;
-                    $last_row=end($reverse_data);
-
-                    //If user have just checked in, he needs to be checked out
-                    if($last_row[0]=="checkin"){
-                        $toadd[]="checkout";
-                        $toadd[]=$date_time;
-                        $checkin_checkout[]=$toadd;
-                        
-                        $checkin_checkout=json_encode($checkin_checkout);
-                        $sql2="UPDATE present_users SET checkin_checkout='$checkin_checkout' WHERE celestaid='$celestaid'";
-                        $result2=query($sql2);
-                       // $response['status']='203';
-                        $message[]="Succesfully checked out.";
-                        
-                    }//Check in user if his last state is checked in
-                    else{
-                        $toadd[]="checkin";
-                        $toadd[]=$date_time;
-                        $checkin_checkout[]=$toadd;
-                        $checkin_checkout=json_encode($checkin_checkout);
-                        $sql3="UPDATE present_users SET checkin_checkout='$checkin_checkout' WHERE celestaid='$celestaid'";
-                        $result3=query($sql3);
-                       // confirm($result1);
-                      //  $response['status']='203';
-                        $message[]="Succesfully checked in.";
-                    }
-
-                }else{
-                    $toadd=array();
-                    $toadd[]="checkin";
-                    $toadd[]=$date_time;
-                    $checkin_checkout[]=$toadd;
-                    $checkin_checkout=json_encode($checkin_checkout);
-                    $sql1="UPDATE present_users SET checkin_checkout='$checkin_checkout' WHERE celestaid='$celestaid'";
-                    $result1=query($sql1);
-                   // $response['status']='203';
-                    $message[]="Succesfully checked in.";
-                }
-                $message[]=$last_row;
-            }//End of main working part
-
-        }else{
-            //$response['status']='404';
-            $message[]="Following celestaid have not registered in the registration desk.";
-        }
-        //$response['message']=$message;
-        echo json_encode($message);
-    }//Ending of if part of post method
-}//Ending of checkin_checkout function
