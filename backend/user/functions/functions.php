@@ -446,7 +446,7 @@ function activate_user(){
 function resendActivationLink(){
 	if($_SERVER['REQUEST_METHOD']=="POST"){
 		$email=escape($_POST['username']); // Email id of the user
-		$sql="SELECT active,id, validation_code,celestaid FROM users WHERE email='$email'";
+		$sql="SELECT active,id, validation_code,anweshaid FROM users WHERE email='$email'";
 		$result=query($sql);
 		confirm($result);
 
@@ -461,8 +461,8 @@ function resendActivationLink(){
 				$message[]="Account already activated.";
 				$response['status']=208;
 			}else{
-				$celestaid=$row['celestaid'];
-				$validation_code=md5($celestaid.microtime());
+				$anweshaid=$row['anweshaid'];
+				$validation_code=md5($anweshaid.microtime());
 				$sql1="UPDATE users SET validation_code='$validation_code' WHERE email='$email'";
 				$result1=query($sql1);
 				confirm($result1);
@@ -485,8 +485,8 @@ function resendActivationLink(){
 				$message[]="Successfully resend the verification link";
 				$response['status']=200;
 				set_message("<p class='bg-success'> Activation link has successfully been sent to your account.</p>");
-				echo json_encode($response);
-				redirect("reg.php");
+				echo json_encode($response['message'][0]);
+				redirect("signup.php");
 			}
 		}else{
 			$message[]="Email not found.";
@@ -494,7 +494,7 @@ function resendActivationLink(){
 		}
 
 		$response['message']=$message;
-		echo json_encode($response);
+		echo json_encode($response['message'][0]);
 
 	}
 }
