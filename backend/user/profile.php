@@ -28,6 +28,7 @@
 	<meta charset="UTF-8">
 	<title>Anwesha | Profile</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
 	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -50,7 +51,9 @@
 				<h1 class="user-header">
 				<?php echo $profile['first_name'] ." ". $profile['last_name'] ?>
 					<h2 class="sub header">
-					AnweshaID: <?php echo $anweshaid ?>
+					AnweshaID: <?php echo $anweshaid ?><br><br>
+					<a href="./assets/qrcodes/<?php echo $anweshaid; ?>.png" download="<?php echo $anweshaid;?>.png" target="_blank" style="text-decoration:none;color:#fff;">
+					DOWNLOAD QR CODE</a>
 					</h2>
 				</h1>
 			</section>
@@ -101,7 +104,7 @@
 					</article>
 				</dt>
 				<dd>
-					<div class="leaderboard-name"><?php echo $ca['first_name']." ".$ca['last_name']; ?></div>
+					<div class="leaderboard-name"><?php echo $ca['first_name']." ".$ca['last_name']." : ". $ca['anweshaid']; ?></div>
 					<div class="leaderboard-value"><?php echo $ca['points']; ?></div>
 				</dd>
 				<?php } ?>
