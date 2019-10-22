@@ -1,5 +1,5 @@
 <?php include("functions/init.php");
-  redirect("../../comingsoon");
+  // redirect("../../comingsoon");
 ?>
 <!DOCTYPE html>
 <html lang="en" >

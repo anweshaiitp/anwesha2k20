@@ -39,7 +39,7 @@ a {
   position: relative;
   z-index: 2;
   max-width: 1200px;
-  padding: 125px 20px;
+  padding: 50px 20px;
   clear: left;
 }
 
@@ -263,6 +263,7 @@ a {
   font-family: Suisseintl, sans-serif;
   color: #fff;
   font-weight: 400;
+  text-align: justify;
 }
 
 .paragraph {
@@ -280,7 +281,7 @@ a {
 }
 
 .heading.purple {
-  color: #413543;
+  color: #78707a;
 }
 
 .heading.happening {
@@ -463,9 +464,10 @@ a {
   width: auto;
   clear: left;
   font-family: Suisseintlmono, sans-serif;
-  color: #9d90a8;
+  color: #fff;
   font-size: 15px;
   text-align: center;
+  text-shadow: 1px 1px 2px #1f1f1f;
 }
 
 .centered-hero-text.all-caps {
@@ -622,7 +624,7 @@ a {
   -webkit-transform-origin: 50% 0%;
   -ms-transform-origin: 50% 0%;
   transform-origin: 50% 0%;
-  color: #413543;
+  color: #78707a;
   font-size: 20px;
   line-height: 28px;
 }

@@ -4,7 +4,7 @@
     if(logged_in()){
         $loggedIn = true;
     }
-    redirect("../comingsoon");
+    // redirect("../comingsoon");
 ?>
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
@@ -59,16 +59,16 @@
             class="hero-heading hidden">Mountain Air.</h1> -->
           <h1 data-w-id="6db6b525-a715-be36-0487-d6aeee974289"
             style="text-shadow: 2px 2px 4px #1f1f1f;-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="hero-heading hidden">Inhale. Exhale.</h1>
+            class="hero-heading hidden">Share</h1>
           <h1 data-w-id="b3bbcaca-3037-c215-5949-2b55f16730b7"
             style="text-shadow: 2px 2px 4px #1f1f1f;-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="hero-heading hidden">Adventure.</h1>
+            class="hero-heading hidden">What</h1>
           <h1 data-w-id="fa079933-42f6-cfd1-9e07-e0b67b6f45e2"
             style="text-shadow: 2px 2px 4px #1f1f1f;-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="hero-heading hidden">Relax.</h1>
+            class="hero-heading hidden">We</h1>
           <h1 data-w-id="dac6d156-af9e-b1a2-24a2-bfb82221cceb"
             style="text-shadow: 2px 2px 4px #1f1f1f;-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="hero-heading hidden">Revive.</h1>
+            class="hero-heading hidden">Believe.</h1>
         </div>
         <div class="hold-logo"><img src="images/logo_favi.png" width="383" alt="Epicurrence 2018 Badge"
             srcset="images/logo_favi.png 500w, images/logo_favi.png 1148w"
@@ -82,12 +82,12 @@
         <div class="hold-ticket-link-and-heading">
           <h3 data-w-id="044dc31d-1cab-062f-88f9-93a6236c5030"
             style="-webkit-transform:translateX(0) translateY(0%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0;text-shadow: 2px 2px 4px #1f1f1f;"
-            class="heading-2">Anwesha is back.</h3>
+            class="heading-2">Anwesha.</h3>
           <div data-w-id="d78e5e54-e71e-0c52-ca33-b49f266b78e3"
             style="text-shadow: 2px 2px 4px #1f1f1f;opacity:0;-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
             class="hold-dates">
             <div class="text-block">2020</div>
-            <div class="text-block-2">Indian Institute of Technology Patna<br>Coming soon !!</div>
+            <div class="text-block-2">Indian Institute of Technology Patna</div>
           </div>
           <?php if($loggedIn){ ?>
           <a href="../backend/user/profile.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
@@ -203,7 +203,7 @@
   </div> -->
   <div class="section overflow-hidden">
     <div class="container w-container">
-      <p class="paragraph">About</p>
+      <p class="paragraph" style="background-color: #fff;color: #000;padding: 10px;width: 100px;text-align: center;">About</p>
       <div class="row w-row">
         <div class="column w-col w-col-8">
           <h1 class="heading-5">Anwesha is a Techno-Cultural extravaganza held every year in spring. Since its inception
@@ -225,8 +225,8 @@
       </div>
       <div class="w-row">
         <div class="w-col w-col-4">
-          <h2 class="heading happening">Wow. Yup.<br>It’s happening!</h2>
-          <!-- <img src="images/signature.png" width="278"
+          <!-- <h2 class="heading happening">Wow. Yup.<br>It’s happening!</h2>
+          <img src="images/signature.png" width="278"
             alt="Dann Petty Signature" class="image-5"> -->
         </div>
         <div class="w-col w-col-4">
@@ -240,8 +240,9 @@
         <div class="text-block-4 taller biggest">*Project Management By <span class="text-span">Dalia</span></div><img
           src="images/dalia15x.png" width="34.5" class="image-6">
       </a> -->
-      <div data-w-id="5340b3c5-7297-a3e7-6a74-9ddf780476be" class="yeww">YEWWW</div>
-    </div><img src="images/clouds-left.png" data-w-id="4921c091-e1f5-8d6f-a7ec-d84f70d7a902" class="image-7">
+      <!-- <div data-w-id="5340b3c5-7297-a3e7-6a74-9ddf780476be" class="yeww">YEWWW</div> -->
+  </div>
+    <img src="images/clouds-left.png" data-w-id="4921c091-e1f5-8d6f-a7ec-d84f70d7a902" class="image-7">
     <div class="container w-container">
       <div class="status-block w-clearfix">
         <div data-w-id="248dc501-904e-e45f-8c94-50fa470d415c" class="activity-icon full v3">
@@ -516,9 +517,11 @@
       </div>
     </div>
   </div> -->
-  <div class="section">
-
-  </div>
+  <!-- <div class="section">
+    <div class="container w-container">
+        <p class="paragraph" style="background-color: #fff;color: #000;padding: 10px;width: 100px;text-align: center;">Leaderboard</p>
+    </div>
+  </div> -->
   <div class="section">
     <div class="container w-container">
       <div class="row flexed w-row">
@@ -580,7 +583,7 @@
         </div>
       </div>
     </div>
-    <div class="container footer w-container">
+    <div class="container footer w-container" style="padding: 0 20px 50px 20px;">
       <div class="flex-footer">
         <div class="left-side">
           <a href="https://www.facebook.com/anwesha.iitpatna/" data-w-id="a94e6ebb-78da-8e9c-c601-d995d2cff111"
