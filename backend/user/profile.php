@@ -96,8 +96,7 @@
 			</nav>
 
 			<dl class="leaderboard">
-				<?php $i=0; foreach($data as $ca){
-					if($i>=5){break;}else $i = $i+1; ?>
+				<?php foreach($data as $ca){ ?>
 				<dt>
 					<article class="progress">
 						<section class="progress-bar" style="width: <?php echo ($ca['points']*100)/$hpoint;?>%;"></section>
@@ -109,7 +108,7 @@
 				</dd>
 				<?php } ?>
 				
-				<!-- <dt>
+				<dt>
 					<article class="progress">
 						<section class="progress-bar" style="width: 65%;"></section>
 					</article>
@@ -144,7 +143,7 @@
 				<dd>
 					<div class="leaderboard-name">Martin Geiger</div>
 					<div class="leaderboard-value">10.235</div>
-				</dd> -->
+				</dd>
 			</dl>
 		</section>
 	</div>
