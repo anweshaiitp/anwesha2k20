@@ -5,7 +5,7 @@
 if (logged_in()) {
     redirect("profile.php");
 }
-redirect("../../comingsoon");
+// redirect("../../comingsoon");
 ?>
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@ redirect("../../comingsoon");
       <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">       -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"> -->
       <meta name="viewport" content="width=device-width">
     <!-- <link rel="stylesheet" href="./css/style.css"> -->
     <link rel="stylesheet" href="./css/login.css">
@@ -32,13 +32,11 @@ redirect("../../comingsoon");
           <?php login_signup() ?>
           <input class="not-radio" id="anweshaid" name="anweshaid" required="required" placeholder="Anwesha ID" />
           <input class="not-radio" type="password" id="password" name="password" required="required" placeholder="Password" />
-          <input type="checkbox" name="remember" id="password" />
-          <span class="lever"></span>
-          Remember Me
-          <a href="#">Forgot your password?</a>
-          <button type="submit" name="login" id="login" >Sign In</button>
-          <p /*id="card"*/>Don't have an account?</p>
-          <p><a href="./casignup.php">SignUp now !!</a></p>
+          <!-- <a href="#" color>Forgot your password?</a> -->
+          <button type="submit" name="login" id="login" >Sign In</button><br>
+          <a href="./resend_alink.php"><span class="btn">Resend Activation Link</span></a><br>
+          <p /*id="card"*/ style="margin:0;">Don't have an account?</p>
+          <p style="margin:0;"><a href="./casignup.php" style="color: #fff;">SignUp now !!</a></p>
         </form>
       </div>
       <!-- <div class="back">
@@ -58,19 +56,19 @@ redirect("../../comingsoon");
       </div> -->
     </div>
   </div>
-  <div class="fixed-action-btn toolbar">
+  <!-- <div class="fixed-action-btn toolbar">
     <a class="btn-floating btn-large amber black-text">
         Menu
     </a>
     <ul>
         <li><a class="indigo center" href="../../">Home</a></li>
-        <li><a class="blue center" href="../../ca/ca.php">Campus Ambassador</a></li>
+        <li><a class="blue center" href="../../ca/ca.php">Campus Ambassador</a></li> -->
         <!-- <li><a class="red center" href="../../sponsors.html">Sponsors</a></li> -->
-        <li><a class="red center" href="./signup.php">Login/Signup</a></li>
+        <!-- <li><a class="red center" href="./signup.php">Login/Signup</a></li>
     </ul>
-  </div>
+  </div> -->
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script> -->
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 <script src="./js/login.js"></script>
 </html>

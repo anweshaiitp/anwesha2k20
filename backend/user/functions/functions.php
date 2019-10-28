@@ -442,6 +442,64 @@ function activate_user(){
 	}
 }
 
+// Resend Activation Link
+function resendActivationLink(){
+	if($_SERVER['REQUEST_METHOD']=="POST"){
+		$email=escape($_POST['username']); // Email id of the user
+		$sql="SELECT active,id, validation_code,anweshaid FROM users WHERE email='$email'";
+		$result=query($sql);
+		confirm($result);
+
+		$response=array();
+		$message=array();
+
+		if(row_count($result)==1){
+			$row=fetch_array($result);
+			$active=$row['active'];
+
+			if($active==1){
+				$message[]="Account already activated.";
+				$response['status']=208;
+			}else{
+				$anweshaid=$row['anweshaid'];
+				$validation_code=md5($anweshaid.microtime());
+				$sql1="UPDATE users SET validation_code='$validation_code' WHERE email='$email'";
+				$result1=query($sql1);
+				confirm($result1);
+				$activation_link="https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code";
+
+				if(isUserCA($email)){
+					$sql2="UPDATE ca_users SET validation_code='$validation_code' where email='$email'";
+					$result2=query($sql2);
+					$activation_link="https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19";
+				}
+
+				$subject="Re-Activation Link";
+				$msg="<p>
+				Please click the link below to activate your celesta account and login.<br/>
+					<a href='$activation_link'>$activation_link</a>
+					</p>
+				";
+				$header="From: noreply@yourwebsite.com";
+				send_email($email,$subject,$msg,$header);
+				$message[]="Successfully resend the verification link";
+				$response['status']=200;
+				set_message("<p class='bg-success'> Activation link has successfully been sent to your account.</p>");
+				echo json_encode($response['message'][0]);
+				redirect("signup.php");
+			}
+		}else{
+			$message[]="Email not found.";
+			$response['status']=404;
+		}
+
+		$response['message']=$message;
+		echo json_encode($response['message'][0]);
+
+	}
+}
+
+
 //Validate user Login
 function validate_user_login(){
 	$errors=[];
@@ -668,12 +726,12 @@ function reset_password(){
 							$result1=query($sql1);
 
 							//Updating in present database also, if the email exists
-							$sql2="SELECT id FROM present_users WHERE email='".escape($email)."' ";
-							$result2=query($sql2);
-							if(row_count($result2)==1){
-								$sql3="UPDATE present_users SET password='".$password."' WHERE email='".escape($email)."' ";
-								$result3=query($sql3);
-							}
+							// $sql2="SELECT id FROM present_users WHERE email='".escape($email)."' ";
+							// $result2=query($sql2);
+							// if(row_count($result2)==1){
+							// 	$sql3="UPDATE present_users SET password='".$password."' WHERE email='".escape($email)."' ";
+							// 	$result3=query($sql3);
+							// }
 							
 							set_message("<p class='bg-success text-center'> Your password has been resetted.</p>");
 							redirect("reg.php");

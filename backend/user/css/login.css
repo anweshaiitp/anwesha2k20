@@ -1,6 +1,8 @@
 body
 {
-    background: #cfd8dc;
+    background: #1D2B64;
+    background: -webkit-linear-gradient(to right, #F8CDDA, #1D2B64);
+	background: linear-gradient(to right, #F8CDDA, #1D2B64);
 }
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
@@ -49,7 +51,9 @@ body
 .front
 {
     color: #fff;
-    background: #2196f3;
+	background: #AA076B;
+    background: -webkit-linear-gradient(to right, #61045F, #AA076B);
+    background: linear-gradient(to right, #61045F, #AA076B);
 }
 
 .back
@@ -93,8 +97,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #e45b6c;
+	background-color: #e45b6c;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -115,4 +119,11 @@ button:focus {
 button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
+}
+
+.btn {
+	color: #fff;
+	background-color: #2BBBAD;
+	padding: 10px;
+	border-radius: 50px;
 }
