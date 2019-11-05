@@ -114,8 +114,8 @@ function user_registration(){
             $errors[]="Your password fields didn't match";
         }
 
-        if(strlen($referral_id)!=8){
-			 $referral_id ="CLST1504";
+        if(strlen($referral_id)!=7){
+			 $referral_id ="ANW1504";
 		 }
 
         if(email_exists($email)){
@@ -154,7 +154,7 @@ function user_registration(){
 
             if(send_email($email,$subject,$msg,$header)){
                 if(!refrral_id_exist($referral_id)){
-                    $referral_id="CLST1504";
+                    $referral_id="ANW1504";
                 }
                 update_referral_points($referral_id);
             
