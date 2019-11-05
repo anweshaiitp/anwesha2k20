@@ -55,45 +55,6 @@ DELIMITER;
 return $error;
 }
 
-//To check if the given email address already exists or not
-function email_exists($email){
-	$sql="SELECT id FROM users WHERE email='$email'";
-	$result=query($sql);
-	if(row_count($result)==1){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
-//To check if the given phone number already exists or not
-function phone_exists($email){
-	$sql="SELECT id FROM users WHERE phone='$phone'";
-	$result=query($sql);
-	if(row_count($result)==1){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
-// To check if the user exists or not
-function refrral_id_exist($referral_id){
-	$sql = "SELECT id, active FROM ca_users WHERE anweshaid ='".$referral_id."'";
-	$result = query($sql);
-	if(row_count($result)==1){
-		$row=fetch_array($result);
-		if($row['active']==1){
-			return true;
-		}else{
-			return false;
-		}
-	}else{
-		return false;
-	}
-}
 
 //Attaching the qr code generator
 function generateQRCode($anweshaid,$first_name,$last_name){
@@ -162,7 +123,7 @@ function login_signup(){
 	 	}
 
 	 	if(strlen($phone)!=10){
-	 		$errors[]="Your phone number should have than 10 digits.";
+	 		$errors[]="Your phone number should have 10 digits.";
 	 	}
 
 	 	if(strlen($email)<$min){
@@ -187,7 +148,7 @@ function login_signup(){
 		}
 
 		 if(strlen($referral_id)!=8){
-			 $referral_id ="ANW1504";
+			 $referral_id ="ANW2000";
 		 }
 
 	 	if(email_exists($email)){
@@ -315,11 +276,11 @@ function ca_register($first_name, $last_name, $phone, $college, $email, $passwor
 		$qrcode="https://anwesha.info/backend/user/assets/qrcodes/".$anweshaid.".png";
 
 		//CONTENTS OF EMAIL
-		$subject="Activate anwesha Account";
+		$subject="Activate Anwesha Account";
 		$msg="<p>
-		You have successfully registered as a Campus Ambassador in anwesha-2k19. Please verify your account to get the details.
+		You have successfully registered as a Campus Ambassador in Anwesha-2k20. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
-			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k19'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k19</a>
+			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20</a>
 			</p>
 		";
 		$header="From: noreply@yourwebsite.com";
@@ -362,13 +323,13 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 		$anweshaid=getAnweshaId();
 		$validation_code=md5($anweshaid+microtime());
 		generateQRCode($anweshaid,$first_name,$last_name);
-		// $qrcode="http://localhost:8888/anwesha2k19-Webpage/backend/user/assets/qrcodes/".$anweshaid.".png";
+		// $qrcode="http://localhost:8888/anwesha2k20-Webpage/backend/user/assets/qrcodes/".$anweshaid.".png";
 		$qrcode="https://anwesha.info/backend/user/assets/qrcodes/".$anweshaid.".png";
 
 		//CONTENTS OF EMAIL
-		$subject="Activate anwesha Account";
+		$subject="Activate Anwesha Account";
 		$msg="<p>
-		You have successfully created a anwesha Account. Please verify your account to get the details.
+		You have successfully created a Anwesha Account. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
 			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code</a>
 			</p>
@@ -377,7 +338,7 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 		//Added to database if mail is sent successfully
 		if(send_email($email,$subject,$msg,$header)){
 			if(!refrral_id_exist($referral_id)){
-				$referral_id="CLST1504";
+				$referral_id="ANW2000";
 			}
 			update_referral_points($referral_id);
 
@@ -393,22 +354,6 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 		}
 	}
 }
-
-// Add referral points
-function update_referral_points($referral_id){
-	$sql = "SELECT score FROM ca_users WHERE anweshaid='$referral_id'";
-	$result = query($sql);
-	if(row_count($result)==1){
-		$row=fetch_array($result);
-		$points=$row['score'];
-		$points = $points + 10;
-
-		$sql1 = "UPDATE ca_users SET score=$points WHERE anweshaid='$referral_id'";
-		$result1 = query($sql1);
-		confirm($result1);
-	}
-}
-
 //Activate User functions
 function activate_user(){
 	if($_SERVER['REQUEST_METHOD']=="GET"){
@@ -435,7 +380,7 @@ function activate_user(){
 				// To activate ca register table
 				if(isset($_GET['ca'])){
 					$ca =clean($_GET['ca']);
-					if($ca =="campus_ambassador_anwesha2k19"){
+					if($ca =="campus_ambassador_anwesha2k20"){
 						$sql1="SELECT id FROM ca_users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 						$result1=query($sql1);
 						confirm($result1);
@@ -449,7 +394,7 @@ function activate_user(){
 					}
 				}
 
-				$subject="anwesha Account Details";
+				$subject="Anwesha Account Details";
 
 				$header="From: noreply@yourwebsite.com";
 
@@ -459,7 +404,6 @@ function activate_user(){
 					Hi $first_name, you have successfully completed your CA registration process.<br>
 					Your anweshaid is : <b>$anweshaid</b><br>
 					Your referral id is: <b>$anweshaid</b><br>
-					Please join the WhatsApp Group : <a href='https://chat.whatsapp.com/KiaTa2umQ2wKoDX6pzptXp'>https://chat.whatsapp.com/KiaTa2umQ2wKoDX6pzptXp</a>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
 					</p>
@@ -467,7 +411,7 @@ function activate_user(){
 				}else{
 					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
 					$msg="<p>
-					Hi $first_name, you have successfully created a anwesha Account.<br>
+					Hi $first_name, you have successfully created a Anwesha Account.<br>
 					Your anweshaid is : <b>$anweshaid</b><br>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
@@ -518,7 +462,7 @@ function resendActivationLink(){
 				if(isUserCA($email)){
 					$sql2="UPDATE ca_users SET validation_code='$validation_code' where email='$email'";
 					$result2=query($sql2);
-					$activation_link="https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k19";
+					$activation_link="https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20";
 				}
 
 				$subject="Re-Activation Link";
