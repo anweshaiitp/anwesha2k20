@@ -67,6 +67,18 @@ function email_exists($email){
 	}
 }
 
+//To check if the given phone number already exists or not
+function phone_exists($email){
+	$sql="SELECT id FROM users WHERE phone='$phone'";
+	$result=query($sql);
+	if(row_count($result)==1){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 // To check if the user exists or not
 function refrral_id_exist($referral_id){
 	$sql = "SELECT id, active FROM ca_users WHERE anweshaid ='".$referral_id."'";
@@ -149,25 +161,42 @@ function login_signup(){
 	 		$errors[]="Your first name cannot be more than {$max}";
 	 	}
 
-	 	if(strlen($phone)>$max){
-	 		$errors[]="Your phone number cannot have more than 10 digits.";
+	 	if(strlen($phone)!=10){
+	 		$errors[]="Your phone number should have than 10 digits.";
 	 	}
 
 	 	if(strlen($email)<$min){
 	 		$errors[]="Your email cannot be less than {$min}";
-	 	}
+		 }
+
+		$regex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
+		if(!preg_match($regex,$email)){
+			$errors[]="Enter valid email address.";
+		}
 
 	 	if($password!==$confirm_password){
 	 		$errors[]="Your password fields didn't match";
 		 }
-		 
-		 if(strlen($referral_id)!=7){
+
+		$uppercase = preg_match('@[A-Z]@', $password);
+		$lowercase = preg_match('@[a-z]@', $password);
+		$number    = preg_match('@[0-9]@', $password);
+
+		if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+			$errors[]="Your password must be at least 8 character length. Must contain at least one capital letter, 1 number, 1 small letter.";
+		}
+
+		 if(strlen($referral_id)!=8){
 			 $referral_id ="ANW1504";
 		 }
 
 	 	if(email_exists($email)){
 	 		$errors[]="Email already taken";
-	 	}
+		 }
+
+		 if(phone_exists($phone)){
+			 $errors[]="Phone number already taken";
+		 }
 
 	 	if(!empty($errors)){
 	 		foreach($errors as $error){
@@ -216,8 +245,8 @@ function validate_ca_registration(){
 	 		$errors[]="Your last name cannot be more than {$max}";
 	 	}
 
-	 	if(strlen($phone)>$max){
-	 		$errors[]="Your phone number cannot have more than 10 digits.";
+	 	if(strlen($phone)!=10){
+	 		$errors[]="Your phone number should have 10 digits.";
 	 	}
 
 	 	if(strlen($email)<$min){
@@ -226,15 +255,32 @@ function validate_ca_registration(){
 
 	 	if($password!==$confirm_password){
 	 		$errors[]="Your password fields donot match";
-	 	}
+		 }
+
+		$regex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
+		if(!preg_match($regex,$email)){
+			$errors[]="Enter valid email address.";
+		}
+		 
+		$uppercase = preg_match('@[A-Z]@', $password);
+		$lowercase = preg_match('@[a-z]@', $password);
+		$number    = preg_match('@[0-9]@', $password);
+
+		if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+			$errors[]="Your password must be at least 8 character length. Must contain at least one capital letter, 1 number, 1 small letter.";
+		}
 
 	 	if(email_exists($email)){
 	 		$errors[]="Email already taken";
-		 }
-		 
+		}
+
+		if(phone_exists($phone)){
+			$errors[]="Phone number already taken";
+		}
+
 		if(!empty($errors)){
 	 		foreach($errors as $error){
-	 			echo validation_errors($error);	
+	 			echo validation_errors($error);
 	 		}
 	 		return json_encode(array_merge(array("201"),$errors));
 	 	}else{
@@ -269,11 +315,11 @@ function ca_register($first_name, $last_name, $phone, $college, $email, $passwor
 		$qrcode="https://anwesha.info/backend/user/assets/qrcodes/".$anweshaid.".png";
 
 		//CONTENTS OF EMAIL
-		$subject="Activate Anwesha Account";
+		$subject="Activate anwesha Account";
 		$msg="<p>
-		You have successfully registered as a Campus Ambassador in Anwesha-2k20. Please verify your account to get the details.
+		You have successfully registered as a Campus Ambassador in anwesha-2k19. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
-			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20</a>
+			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k19'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k19</a>
 			</p>
 		";
 		$header="From: noreply@yourwebsite.com";
@@ -284,8 +330,8 @@ function ca_register($first_name, $last_name, $phone, $college, $email, $passwor
 			$result=query($sql);
 			confirm($result);
 
-			$sql="INSERT INTO ca_users(first_name,last_name,phone,college,email,password,validation_code,active,anweshaid,qrcode,gender) ";
-			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$validation_code','0','$anweshaid','".$qrcode."','$gender')";
+			$sql="INSERT INTO ca_users(first_name,last_name,phone,college,email,validation_code,active,anweshaid,qrcode,gender) ";
+			$sql.=" VALUES('$first_name','$last_name','$phone','$college','$email','$validation_code','0','$anweshaid','".$qrcode."','$gender')";
 			$result=query($sql);
 			confirm($result);
 
@@ -316,13 +362,13 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 		$anweshaid=getAnweshaId();
 		$validation_code=md5($anweshaid+microtime());
 		generateQRCode($anweshaid,$first_name,$last_name);
-		// $qrcode="http://localhost:8888/Celesta2k19-Webpage/backend/user/assets/qrcodes/".$anweshaid.".png";
+		// $qrcode="http://localhost:8888/anwesha2k19-Webpage/backend/user/assets/qrcodes/".$anweshaid.".png";
 		$qrcode="https://anwesha.info/backend/user/assets/qrcodes/".$anweshaid.".png";
 
 		//CONTENTS OF EMAIL
-		$subject="Activate Anwesha Account";
+		$subject="Activate anwesha Account";
 		$msg="<p>
-		You have successfully created a Anwesha Account. Please verify your account to get the details.
+		You have successfully created a anwesha Account. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
 			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code</a>
 			</p>
@@ -331,7 +377,7 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 		//Added to database if mail is sent successfully
 		if(send_email($email,$subject,$msg,$header)){
 			if(!refrral_id_exist($referral_id)){
-				$referral_id="ANW1504";
+				$referral_id="CLST1504";
 			}
 			update_referral_points($referral_id);
 
@@ -350,14 +396,14 @@ function register_user($first_name,$last_name,$phone,$college,$email,$password,$
 
 // Add referral points
 function update_referral_points($referral_id){
-	$sql = "SELECT points FROM ca_users WHERE anweshaid='$referral_id'";
+	$sql = "SELECT score FROM ca_users WHERE anweshaid='$referral_id'";
 	$result = query($sql);
 	if(row_count($result)==1){
 		$row=fetch_array($result);
-		$points=$row['points'];
-		$points = $points + 50;
+		$points=$row['score'];
+		$points = $points + 10;
 
-		$sql1 = "UPDATE ca_users SET points=$points WHERE anweshaid='$referral_id'";
+		$sql1 = "UPDATE ca_users SET score=$points WHERE anweshaid='$referral_id'";
 		$result1 = query($sql1);
 		confirm($result1);
 	}
@@ -389,7 +435,7 @@ function activate_user(){
 				// To activate ca register table
 				if(isset($_GET['ca'])){
 					$ca =clean($_GET['ca']);
-					if($ca =="campus_ambassador_anwesha2k20"){
+					if($ca =="campus_ambassador_anwesha2k19"){
 						$sql1="SELECT id FROM ca_users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 						$result1=query($sql1);
 						confirm($result1);
@@ -403,7 +449,7 @@ function activate_user(){
 					}
 				}
 
-				$subject="Anwesha Account Details";
+				$subject="anwesha Account Details";
 
 				$header="From: noreply@yourwebsite.com";
 
@@ -413,6 +459,7 @@ function activate_user(){
 					Hi $first_name, you have successfully completed your CA registration process.<br>
 					Your anweshaid is : <b>$anweshaid</b><br>
 					Your referral id is: <b>$anweshaid</b><br>
+					Please join the WhatsApp Group : <a href='https://chat.whatsapp.com/KiaTa2umQ2wKoDX6pzptXp'>https://chat.whatsapp.com/KiaTa2umQ2wKoDX6pzptXp</a>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
 					</p>
@@ -420,7 +467,7 @@ function activate_user(){
 				}else{
 					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
 					$msg="<p>
-					Hi $first_name, you have successfully created a Anwesha Account.<br>
+					Hi $first_name, you have successfully created a anwesha Account.<br>
 					Your anweshaid is : <b>$anweshaid</b><br>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
@@ -471,12 +518,12 @@ function resendActivationLink(){
 				if(isUserCA($email)){
 					$sql2="UPDATE ca_users SET validation_code='$validation_code' where email='$email'";
 					$result2=query($sql2);
-					$activation_link="https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20";
+					$activation_link="https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k19";
 				}
 
 				$subject="Re-Activation Link";
 				$msg="<p>
-				Please click the link below to activate your Anwesha account and login.<br/>
+				Please click the link below to activate your anwesha account and login.<br/>
 					<a href='$activation_link'>$activation_link</a>
 					</p>
 				";
@@ -485,8 +532,8 @@ function resendActivationLink(){
 				$message[]="Successfully resend the verification link";
 				$response['status']=200;
 				set_message("<p class='bg-success'> Activation link has successfully been sent to your account.</p>");
-				echo json_encode($response['message'][0]);
-				redirect("signup.php");
+				echo json_encode($response);
+				redirect("login.php");
 			}
 		}else{
 			$message[]="Email not found.";
@@ -494,11 +541,10 @@ function resendActivationLink(){
 		}
 
 		$response['message']=$message;
-		echo json_encode($response['message'][0]);
+		echo json_encode($response);
 
 	}
 }
-
 
 //Validate user Login
 function validate_user_login(){
@@ -510,7 +556,7 @@ function validate_user_login(){
 
 		//Listing down possible errors
 		if(empty($anweshaid)){
-			$errors[]="Anwesha ID field cannot be empty.";
+			$errors[]="anwesha ID field cannot be ampty.";
 		}
 
 		if(empty($password)){
@@ -525,6 +571,19 @@ function validate_user_login(){
 			return json_encode(array_merge(array("404"),$errors));
 		}else{
 			if(login_user($anweshaid,$password,$remember)){
+				if(isset($_GET['redirecteventsdata'])){
+					redirect("../../events/eventsdata.php?data=".$_GET['redirecteventsdata']);
+					return 0;
+				}
+				if(isset($_GET['redirecteventsdetails'])){
+					redirect("../../events/eventsdetails.php?id=".$_GET['redirecteventsdetails']);
+					return 0;
+				}
+				if (isset($_GET['fromNjath'])){
+					// redirect("../../njath/index.php");
+					header("Location: https://anwesha.info/njath/");
+					return 0;
+				}
 				redirect("profile.php");
 				return json_encode(array("400"));//User logged in
 			}else{
@@ -539,7 +598,7 @@ function validate_user_login(){
 //Log in the user
 function login_user($anweshaid, $password, $remember){
 
-	$sql = "SELECT password, id, qrcode, active FROM users WHERE anweshaid ='".escape($anweshaid)."' AND active=1";
+	$sql = "SELECT password, id, qrcode, active, access_token FROM users WHERE anweshaid ='".escape($anweshaid)."' AND active=1";
 
 	$result=query($sql);
 	if(row_count($result)==1){
@@ -548,14 +607,21 @@ function login_user($anweshaid, $password, $remember){
 		$db_password=$row['password'];
 		$qrcode=$row['qrcode'];
 		if(md5($password)==$db_password){
-			$access_token=$anweshaid.$password.microtime();
-			$access_token=md5($access_token);
+			if(empty($row['access_token'])){
+				$access_token=$anweshaid.$password.microtime();
+				$access_token=md5($access_token);
+				$sql1="UPDATE users SET access_token='$access_token' WHERE anweshaid='$anweshaid'";
+				$result1 = query($sql1);
+			}else{
+				$access_token=$row['access_token'];
+			}
 
 			$sql1="UPDATE users SET access_token='$access_token' WHERE anweshaid='$anweshaid'";
 			$result1 = query($sql1);
 			$_SESSION['anweshaid']=$anweshaid;	//Storing the anwesha id in a session
 			$_SESSION['qrcode']=$qrcode;
 			$_SESSION['access_token']=$access_token;
+			$_SESSION['userID']=$anweshaid;
 
 			if($remember=="on"){
 				 setcookie('anweshaid',$anweshaid, time() + 86400);
@@ -606,7 +672,7 @@ function recover_password(){
 				$result1= query($sql1);
 				confirm($result1); 
 
-				$subject = "Please reset your Anwesha ID password.";
+				$subject = "Please reset your anwesha ID password.";
 				$message = "<p>Your anwesha id is: {$anweshaid}.<br/>
 					Your password reset code is {$validation_code} <br/>
 					Click here to reset your password https://anwesha.info/backend/user/code.php?email=$email&code=$validation_code </p>";
@@ -732,9 +798,9 @@ function reset_password(){
 							// 	$sql3="UPDATE present_users SET password='".$password."' WHERE email='".escape($email)."' ";
 							// 	$result3=query($sql3);
 							// }
-							
+
 							set_message("<p class='bg-success text-center'> Your password has been resetted.</p>");
-							redirect("reg.php");
+							redirect("login.php");
 						}else{
 							echo validation_errors("Failed to reset password. Try again later.");
 						}
@@ -755,7 +821,7 @@ function reset_password(){
 
 // CA Leaderboard
 function ca_leaderboard(){
-	$sql="SELECT * FROM ca_users WHERE active=1 ORDER BY points DESC";
+	$sql="SELECT * FROM ca_users WHERE active=1";
 	$result=query($sql);
 	$data = array();
     while($row = fetch_array($result))
@@ -780,4 +846,3 @@ function user_details($anweshaid){
 	}
 	return $data;
 }
-

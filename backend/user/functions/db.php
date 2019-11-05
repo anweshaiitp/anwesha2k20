@@ -1,6 +1,7 @@
 <?php
 
-$con =mysqli_connect('localhost','root','','anwesha2k20');
+// $con =mysqli_connect('localhost','celestao','l5da6rV15J','celestao_2019');
+$con =mysqli_connect('localhost','atm1504','11312113','anwesha2k20');
 
 //Count no of rows in the query result
 function row_count($result){
@@ -26,12 +27,6 @@ function query($query){
 function fetch_array($result){
 	global $con;
 	return mysqli_fetch_array($result);
-}
-
-function debug_query($result){
-	if(!result){
-		return mysqli_error($con);
-	}
 }
 
 //To check if query was succesfull or not
