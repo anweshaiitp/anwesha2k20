@@ -113,10 +113,13 @@ function send_bulk_email($data_emails,$subject,$msg,$headers){
 function getAnweshaId(){
 	$sql="SELECT anweshaid FROM users ORDER BY id DESC LIMIT 1";
 	$result=query($sql);
-	if($result==1){
+	if(row_count($result)){
 		$row=fetch_array($result);
-		return "ANW".substr($row['anweshaid'],3,7);
+		$anw=substr($row['anweshaid'],3,7);
+		$anw= (int)$anw + 1 ;
+		$anweshaid= "ANW".$anw;
 	}else{
-		return "ANW2000";
+		$anweshaid="ANW2000";
 	}
+	return $anweshaid;
 }
