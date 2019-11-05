@@ -1,13 +1,13 @@
 <?php include("functions/init.php");
 
-$celestaid=$_SESSION['celestaid'];
-$sql="UPDATE users SET access_token='' WHERE celestaid='$celestaid'";
+$anweshaid=$_SESSION['anweshaid'];
+$sql="UPDATE users SET access_token='' WHERE anweshaid='$anweshaid'";
 $result=query($sql);
 
 session_destroy();
-if(isset($_COOKIE['celestaid'])){
-	unset($_COOKIE['celestaid']);
-	setcookie('celestaid','',time()-86400);
+if(isset($_COOKIE['anweshaid'])){
+	unset($_COOKIE['anweshaid']);
+	setcookie('anweshaid','',time()-86400);
 	unset($_COOKIE['qrcode']);
 	setcookie('qrcode','',time()-86400);
 }
