@@ -273,7 +273,7 @@ function ca_register($first_name, $last_name, $phone, $college, $email, $passwor
 		$msg="<p>
 		You have successfully registered as a Campus Ambassador in Anwesha-2k20. Please verify your account to get the details.
 		Please click the link below to activate your Account and login.<br/>
-			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19</a>
+			<a href='https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20'>https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20</a>
 			</p>
 		";
 		$header="From: noreply@yourwebsite.com";
@@ -389,7 +389,7 @@ function activate_user(){
 				// To activate ca register table
 				if(isset($_GET['ca'])){
 					$ca =clean($_GET['ca']);
-					if($ca =="campus_ambassador_celesta2k19"){
+					if($ca =="campus_ambassador_anwesha2k20"){
 						$sql1="SELECT id FROM ca_users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 						$result1=query($sql1);
 						confirm($result1);
@@ -466,17 +466,17 @@ function resendActivationLink(){
 				$sql1="UPDATE users SET validation_code='$validation_code' WHERE email='$email'";
 				$result1=query($sql1);
 				confirm($result1);
-				$activation_link="https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code";
+				$activation_link="https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code";
 
 				if(isUserCA($email)){
 					$sql2="UPDATE ca_users SET validation_code='$validation_code' where email='$email'";
 					$result2=query($sql2);
-					$activation_link="https://celesta.org.in/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_celesta2k19";
+					$activation_link="https://anwesha.info/backend/user/activate.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20";
 				}
 
 				$subject="Re-Activation Link";
 				$msg="<p>
-				Please click the link below to activate your celesta account and login.<br/>
+				Please click the link below to activate your Anwesha account and login.<br/>
 					<a href='$activation_link'>$activation_link</a>
 					</p>
 				";
