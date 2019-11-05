@@ -130,7 +130,7 @@ INSERT INTO `events` (`id`, `ev_id`, `ev_category`, `ev_name`, `ev_description`,
 
 CREATE TABLE `present_users` (
   `id` int(11) NOT NULL,
-  `celestaid` varchar(10) NOT NULL,
+  `anweshaid` varchar(10) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `password` text NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE `present_users` (
 -- Dumping data for table `present_users`
 --
 
-INSERT INTO `present_users` (`id`, `celestaid`, `first_name`, `last_name`, `password`, `email`, `phone`, `college`, `date`, `added_by`, `events_registered`, `events_participated`, `qrcode`, `active`, `day1_checkin`, `day1_checkout`, `day2_checkin`, `day2_checkout`, `gender`, `total_charge`, `registration_charge`, `tshirt_charge`, `bandpass_charge`, `events_charge`, `checkin_checkout`) VALUES
+INSERT INTO `present_users` (`id`, `anweshaid`, `first_name`, `last_name`, `password`, `email`, `phone`, `college`, `date`, `added_by`, `events_registered`, `events_participated`, `qrcode`, `active`, `day1_checkin`, `day1_checkout`, `day2_checkin`, `day2_checkout`, `gender`, `total_charge`, `registration_charge`, `tshirt_charge`, `bandpass_charge`, `events_charge`, `checkin_checkout`) VALUES
 (33, 'CLST1001', 'Ar', 'M', '3fc0a7acf087f549ac2b266baf94b8b1', 'eweswf@gmail.com', '8967570983', 'IIT Patna', '2019-09-13 10:19:45', '', NULL, NULL, 'http://localhost:8888/Celesta2k19-Webpage/backend/user/assets/qrcodes/CLST1001.png', 1, NULL, NULL, NULL, NULL, 'm', 100, 100, 0, 0, 0, NULL),
 (26, 'CLST1504', 'Amartya', 'Mondal', '21b8acfc474802e2e0bd25a85f5e924e', 'hayyoulistentome@gmail.com', '9475266283', 'IIT Patna', '2019-05-29 07:44:55', 'admin', '[{\"ev_name\":\"Abcd\",\"ev_id\":\"ATM5151\",\"amount\":0}]', '', 'http://localhost:8888/login/assets/qrcodes/CLST1504.png', 1, NULL, NULL, NULL, NULL, 'm', 400, 100, 300, 0, 0, '[[\"checkin\", \"Wed, 29 May 2019, 13:15:24\"], [\"checkout\", \"Wed, 29 May 2019, 13:16:13\"], [\"checkout\", \"Wed, 29 May 2019, 13:18:09\"], [\"checkout\", \"Wed, 29 May 2019, 13:24:15\"], [\"checkout\", \"Wed, 29 May 2019, 13:24:49\"], [\"checkout\", \"Wed, 29 May 2019, 13:25:35\"], [\"checkout\", \"Wed, 29 May 2019, 13:26:24\"], [\"checkout\", \"Wed, 29 May 2019, 13:26:36\"], [\"checkout\", \"Wed, 29 May 2019, 13:29:12\"], [\"checkout\", \"Wed, 29 May 2019, 13:29:54\"], [\"checkout\", \"Wed, 29 May 2019, 13:31:30\"], [\"checkin\", \"Wed, 29 May 2019, 13:32:47\"], [\"checkout\", \"Wed, 29 May 2019, 13:33:37\"], [\"checkin\", \"Wed, 29 May 2019, 13:33:41\"], [\"checkout\", \"Wed, 29 May 2019, 13:33:46\"], [\"checkin\", \"Wed, 29 May 2019, 13:33:49\"], [\"checkout\", \"Wed, 29 May 2019, 13:50:24\"], [\"checkin\", \"Wed, 29 May 2019, 13:50:28\"], [\"checkout\", \"Wed, 29 May 2019, 13:50:34\"], [\"checkin\", \"Wed, 29 May 2019, 13:50:38\"], [\"checkout\", \"Wed, 29 May 2019, 13:50:41\"], [\"checkin\", \"Wed, 29 May 2019, 13:51:06\"], [\"checkout\", \"Wed, 29 May 2019, 13:51:13\"], [\"checkin\", \"Wed, 29 May 2019, 13:52:52\"], [\"checkout\", \"Wed, 29 May 2019, 13:54:02\"], [\"checkin\", \"Wed, 29 May 2019, 13:55:14\"], [\"checkout\", \"Wed, 29 May 2019, 14:00:19\"], [\"checkin\", \"Wed, 29 May 2019, 14:00:25\"], [\"checkout\", \"Wed, 29 May 2019, 14:02:37\"], [\"checkin\", \"Wed, 29 May 2019, 14:22:11\"], [\"checkout\", \"Wed, 29 May 2019, 14:22:31\"], [\"checkin\", \"Wed, 29 May 2019, 14:23:52\"]]'),
 (23, 'CLST2124', 'Atreyee', 'Mukherjee', '3fc0a7acf087f549ac2b266baf94b8b1', 'dscappsocietyiitp@gmail.com', '8967570983', 'CMC, Kolkata', '2019-05-23 15:00:22', '', '', '', 'http://localhost:8888/login/assets/qrcodes/CLST2124.png', 1, NULL, NULL, NULL, NULL, 'm', 100, 100, 0, 0, 0, NULL),
@@ -250,7 +250,7 @@ ALTER TABLE `events`
 -- Indexes for table `present_users`
 --
 ALTER TABLE `present_users`
-  ADD PRIMARY KEY (`celestaid`),
+  ADD PRIMARY KEY (`anweshaid`),
   ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `email` (`email`);
 

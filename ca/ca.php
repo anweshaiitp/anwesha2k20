@@ -230,7 +230,7 @@
             alt="Dann Petty Signature" class="image-5"> -->
         </div>
         <div class="w-col w-col-4">
-          <div class="div-block"><img src="images/portrait15x.png" width="287" alt="Dann Petty image"
+          <div class="div-block"><img src="images/logo_favi.png" width="287" alt="Dann Petty image"
               class="image-4"><img src="images/WEB1.png" width="383" data-w-id="eaf60bd2-f14c-9a3e-df5f-c739f68e4a67">
           </div>
         </div>
@@ -334,7 +334,7 @@
                 class="heading purple">WHAT IS CA?</h2>
               <p data-w-id="8a5b4391-640a-59d5-4791-7a54d221fa86"
                 style="opacity:0;-webkit-transform:translateX(0) translateY(30%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(30%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(30%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(30%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-                class="paragraph-2">The Campus Ambassador program is one of the leading publicity programs of Celesta.
+                class="paragraph-2">The Campus Ambassador program is one of the leading publicity programs of Anwesha.
                 The promotion of the fest in the respective colleges is assigned to the campus ambassadors. They serve
                 as the intermediaries who bridge the gap between their college and our campus i.e, as a nodal point for
                 any kind of communication or promotion. Campus ambassadors act as the face of one of the biggest
@@ -353,7 +353,7 @@
                 class="paragraph-2">This is an extremely edifying opportunity where one gets to improve their oratory
                 skills and managerial skills by interacting with people and encouraging them to take part in a fest of
                 such huge grandeur. Apart from being advantageous on both personal and managerial grounds, working as a
-                CA also comes with the additional perks of being conferred with an assured certificate from Celesta, IIT
+                CA also comes with the additional perks of being conferred with an assured certificate from Anwesha, IIT
                 Patna validating your work as a campus ambassador. Not to forget are the exhilaratinging prizes and
                 goodies that a CA receives. </p>
             </div>
