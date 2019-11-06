@@ -54,12 +54,13 @@
         <input class="white-text input" required type="password" placeholder="Confirm Password" name="confirm_password" id="confirm_password" />
       </div>
       <div class="gender-row row">
-        <input class="rdo" type="radio" value="m"  name="gender" required>Male</input><br><br>
-        <input class="rdo" type="radio" value="f"  name="gender">Female</input> <br><br>
-        <input class="rdo" type="radio" value="other"  name="gender">Other</input> 
+        <input class="rdo" type="radio" value="m"  name="gender" required>Male<br><br>
+        <input class="rdo" type="radio" value="f"  name="gender">Female<br><br>
+        <input class="rdo" type="radio" value="other"  name="gender">Other
       </div>
     </div>
     <div class="call-to-action">
+    <p>Password must contain an uppercase, a lowercase, a number and minimum 8 characters.</p><br>
       <button id="login-button" type="submit">Sign Up</button>
       <p>Already have an account ? <a href="./signup.php">Sign in now !!</a></p>
     </div>
