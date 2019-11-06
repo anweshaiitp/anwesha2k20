@@ -1,8 +1,8 @@
 <?php 
     include("functions/init.php"); 
-    if(!logged_in()){
-        redirect("signup.php");
-    }
+    // if(!logged_in()){
+    //     redirect("signup.php");
+    // }
     $anweshaid; $imgsrc;$rank = 1;$hpoint;
     if(isset($_SESSION['anweshaid'])){
         $anweshaid = $_SESSION['anweshaid'];
@@ -78,14 +78,14 @@
 				</article>
 			</section>
 
-			<div class="dial">
+			<!-- <div class="dial">
 				<h2 class="dial-title">
-				<?php echo $profile['ca']['score']/100; ?>
+				<?php// echo $profile['ca']['score']/100; ?>
 				</h2>
 				<h3 class="dial-value">
 					Level
 				</h3>
-			</div>
+			</div> -->
 			<?php } ?>
 		</section>
 		<section class="card-details card-section">
@@ -96,7 +96,7 @@
 				</article>
 			</nav>
 
-			<dl class="leaderboard">
+			<dl class="leaderboard" style="padding-right: 10px;">
 				<?php foreach($data as $ca){ ?>
 				<dt>
 					<article class="progress">
