@@ -91,8 +91,8 @@
 		<section class="card-details card-section">
 
 			<nav class="menu">
-				<article class="menu-item menu-item-active">
-					Ranking (Top 5)
+				<article class="menu-item menu-item-active  alint">
+					Ranking
 				</article>
 			</nav>
 
