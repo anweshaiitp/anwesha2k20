@@ -12,15 +12,15 @@ function send_email($email,$subject,$msg,$headers){
 	$mail->isSMTP();                                      // Set mailer to use SMTP
 	$mail->Host = 'tls://mail.celesta.org.in';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = "email";                 // SMTP username
-	$mail->Password = "password"; 
+	$mail->Username = "pranaykgupta21@gmail.com";                 // SMTP username
+	$mail->Password = "9717107893"; 
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 587;                                    // TCP port to connect to
 
-	$mail->setFrom('email', 'Anwesha2k20');
+	$mail->setFrom('pranaykgupta21@gmail.com', 'Anwesha2k20');
 	$mail->addAddress($email);     // Add a recipient
 	//$mail->addAddress('ellen@example.com');               // Name is optional
-	$mail->addReplyTo('email', 'Information');
+	$mail->addReplyTo('pranaykgupta21@gmail.com', 'Information');
 	//$mail->addCC('cc@example.com');
 	//$mail->addBCC('bcc@example.com');
 
