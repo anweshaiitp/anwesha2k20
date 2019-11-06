@@ -476,7 +476,7 @@ function resendActivationLink(){
 				$message[]="Successfully resend the verification link";
 				$response['status']=200;
 				set_message("<p class='bg-success'> Activation link has successfully been sent to your account.</p>");
-				echo json_encode($response);
+				echo json_encode($response['message'][0]);
 				redirect("login.php");
 			}
 		}else{
@@ -485,7 +485,7 @@ function resendActivationLink(){
 		}
 
 		$response['message']=$message;
-		echo json_encode($response);
+		echo json_encode($response['message'][0]);
 
 	}
 }

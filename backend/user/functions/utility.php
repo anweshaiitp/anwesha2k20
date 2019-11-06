@@ -10,7 +10,7 @@ function send_email($email,$subject,$msg,$headers){
 	//$mail->SMTPDebug = 4;                               // Enable verbose debug output
 
 	$mail->isSMTP();                                      // Set mailer to use SMTP
-	$mail->Host = 'tls://mail.celesta.org.in';  // Specify main and backup SMTP servers
+	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
 	$mail->Username = "pranaykgupta21@gmail.com";                 // SMTP username
 	$mail->Password = "password"; 
@@ -69,8 +69,8 @@ function isUserCA($email){
 }
 
 //To check if the given phone number already exists or not
-function phone_exists($email){
-	$sql="SELECT id FROM users WHERE phone='$phone'";
+function phone_exists($phone){
+	$sql="SELECT id FROM users WHERE phone='".$phone."'";
 	$result=query($sql);
 	if(row_count($result)==1){
 		return true;
@@ -99,7 +99,7 @@ function refrral_id_exist($referral_id){
 
 //To check if the given email address already exists or not
 function email_exists($email){
-	$sql="SELECT id FROM users WHERE email='$email'";
+	$sql="SELECT id FROM users WHERE email='".$email."'";
 	$result=query($sql);
 	if(row_count($result)==1){
 		return true;
