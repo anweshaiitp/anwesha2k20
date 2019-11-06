@@ -770,7 +770,7 @@ function reset_password(){
 
 // CA Leaderboard
 function ca_leaderboard(){
-	$sql="SELECT * FROM ca_users WHERE active=1";
+	$sql="SELECT * FROM ca_users WHERE active=1 ORDER BY score DESC";
 	$result=query($sql);
 	$data = array();
     while($row = fetch_array($result))

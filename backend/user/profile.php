@@ -1,8 +1,8 @@
 <?php 
     include("functions/init.php"); 
-    // if(!logged_in()){
-    //     redirect("signup.php");
-    // }
+    if(!logged_in()){
+        redirect("signup.php");
+    }
     $anweshaid; $imgsrc;$rank = 1;$hpoint;
     if(isset($_SESSION['anweshaid'])){
         $anweshaid = $_SESSION['anweshaid'];
@@ -91,8 +91,8 @@
 		<section class="card-details card-section">
 
 			<nav class="menu">
-				<article class="menu-item menu-item-active">
-					Ranking (Top 5)
+				<article class="menu-item menu-item-active  alint">
+					Ranking
 				</article>
 			</nav>
 

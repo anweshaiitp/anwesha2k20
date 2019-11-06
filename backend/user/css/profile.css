@@ -119,13 +119,18 @@ h2.sub.header {
 
 .avatar {
   display: inline-block;
-  background-image: url("../images/avtar.jpg");
+  background-image: url("../images/profile.jpg");
   background-size: cover;
   border-radius: 50%;
   height: 150px;
   width: 150px;
   border: 3px solid #e45b6c;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+}
+.alint {
+  text-align: center;
+  margin:auto;
+  display:inline-block;
 }
 
 .dial {
