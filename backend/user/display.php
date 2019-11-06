@@ -19,7 +19,7 @@
     background-size: cover;
     background-position: center;
     min-height: 100vh;">
-    <canvas id="canvas"></canvas>
+    <!-- <canvas id="canvas"></canvas> -->
     <section class="login-body">
         <div class="row">
             <div class="input-cart col s12 m10 push-m1 z-depth-2" style="color: #fff;">
