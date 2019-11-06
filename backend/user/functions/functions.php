@@ -387,7 +387,7 @@ function activate_user(){
 						$is_ca=true;
 
 						if(row_count($result1)==1){
-							$sql3="UPDATE ca_users SET active = 1, validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
+							$sql3="UPDATE ca_users SET active = 1, validation_code = 0, score = 100 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
 							$result3=query($sql3);
 							confirm($result3);
 						}
@@ -472,12 +472,17 @@ function resendActivationLink(){
 					</p>
 				";
 				$header="From: noreply@yourwebsite.com";
-				send_email($email,$subject,$msg,$header);
-				$message[]="Successfully resend the verification link";
-				$response['status']=200;
-				set_message("<p class='bg-success'> Activation link has successfully been sent to your account.</p>");
-				echo json_encode($response['message'][0]);
-				redirect("login.php");
+				if(send_email($email,$subject,$msg,$header)){
+					$message[]="Successfully resend the verification link";
+					$response['status']=200;
+					set_message("<p class='bg-success'> Activation link has successfully been sent to your account.</p>");
+					echo json_encode($response['message'][0]);
+					redirect("signup.php");
+				}else{
+					$message[]="Please try again";
+					$response['status']=208;					
+				}
+
 			}
 		}else{
 			$message[]="Email not found.";
