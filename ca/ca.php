@@ -101,7 +101,7 @@
               style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
               class="absolute-block"></div>
           </a>
-          <a href="../backend/user/ca_logout.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
+          <a href="../backend/user/logout.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
             style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
             class="button w-inline-block">
             <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Logout</div>
@@ -546,7 +546,7 @@
               style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
               class="absolute-block"></div>
           </a>
-          <a href="../backend/user/ca_logout.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
+          <a href="../backend/user/logout.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
             style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
             class="button w-inline-block">
             <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Logout</div>

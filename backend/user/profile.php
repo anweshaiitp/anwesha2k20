@@ -43,7 +43,7 @@
 		<section class="card-info card-section">
 			<!-- <i class="ion-navicon menu"></i> -->
 			<a style="color: #fff;" href="../../ca/ca.php"><i class="ion-ios-home menu"></i></a>
-			<a style="color: #fff;" href="./ca_logout.php"><i class="ion-log-out search"></i></a>
+			<a style="color: #fff;" href="./logout.php"><i class="ion-log-out search"></i></a>
 			<div class="avatar row">
 			</div>
 
