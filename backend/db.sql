@@ -28,7 +28,7 @@ CREATE TABLE `accommodation` (
   `amount_paid` float NOT NULL DEFAULT '0',
   `gender` varchar(1) NOT NULL,
   `booking_date` varchar(100) NOT NULL,
-  `checkin_checkout` json DEFAULT NULL,
+  `checkin_checkout` LONGTEXT DEFAULT NULL,
   `no_of_days` int(11) NOT NULL,
   `day1` tinyint(1) NOT NULL DEFAULT '0',
   `day2` tinyint(1) NOT NULL DEFAULT '0',
@@ -86,7 +86,7 @@ CREATE TABLE `ca_users` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `gender` varchar(1) NOT NULL,
   `score` bigint(20) NOT NULL DEFAULT '0',
-  `candidates` json DEFAULT NULL
+  `candidates` LONGTEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -116,8 +116,8 @@ CREATE TABLE `events` (
   `ev_date` varchar(50) NOT NULL,
   `ev_start_time` varchar(100) NOT NULL,
   `ev_end_time` varchar(100) NOT NULL,
-  `ev_registrations` json DEFAULT NULL,
-  `ev_participations` json DEFAULT NULL,
+  `ev_registrations` LONGTEXT DEFAULT NULL,
+  `ev_participations` LONGTEXT DEFAULT NULL,
   `ev_amount` float NOT NULL DEFAULT '0',
   `ev_prize` varchar(100) DEFAULT NULL,
   `ev_venue` varchar(252) DEFAULT NULL,
@@ -148,8 +148,8 @@ CREATE TABLE `users` (
   `added_by` varchar(255) NOT NULL DEFAULT 'admin',
   `ca_referral` varchar(8) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `events_registered` json DEFAULT NULL,
-  `events_participated` json DEFAULT NULL,
+  `events_registered` LONGTEXT DEFAULT NULL,
+  `events_participated` LONGTEXT DEFAULT NULL,
   `gender` varchar(1) NOT NULL,
   `access_token` varchar(255) DEFAULT NULL,
   `registration_charge` float NOT NULL DEFAULT '0',
@@ -158,7 +158,7 @@ CREATE TABLE `users` (
   `accommodation_charge` float NOT NULL DEFAULT '0',
   `total_charge` float NOT NULL DEFAULT '0',
   `amount_paid` float NOT NULL DEFAULT '0',
-  `checkin_checkout` json DEFAULT NULL,
+  `checkin_checkout` LONGTEXT DEFAULT NULL,
   `iit_patna` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
