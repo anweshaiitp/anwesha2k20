@@ -13,7 +13,7 @@ function send_email($email,$subject,$msg,$headers){
 	$mail->Host = 'tls://mail.celesta.org.in';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
 	$mail->Username = "pranaykgupta21@gmail.com";                 // SMTP username
-	$mail->Password = "9717107893"; 
+	$mail->Password = "password"; 
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 587;                                    // TCP port to connect to
 

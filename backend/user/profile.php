@@ -10,7 +10,7 @@
         $access_token=$_SESSION['access_token'];
 	}
 	$data = ca_leaderboard();
-	$hpoint = $data[0]['points'];
+	$hpoint = $data[0]['score'];
 	foreach($data as $ca){
 		if($ca['anweshaid'] == $anweshaid){
 			break;
@@ -57,7 +57,7 @@
 					</h2>
 				</h1>
 			</section>
-
+			<?php if($profile['isCA']){ ?>
 			<section class="statistics">
 				<article class="statistic">
 					<h4 class="statistic-title">
@@ -73,19 +73,20 @@
 						Score
 					</h4>
 					<h3 class="statistic-value">
-						<?php echo $profile['ca']['points']; ?>
+						<?php echo $profile['ca']['score']; ?>
 					</h3>
 				</article>
 			</section>
 
 			<div class="dial">
 				<h2 class="dial-title">
-				<?php echo $profile['ca']['points']/100; ?>
+				<?php echo $profile['ca']['score']/100; ?>
 				</h2>
 				<h3 class="dial-value">
 					Level
 				</h3>
 			</div>
+			<?php } ?>
 		</section>
 		<section class="card-details card-section">
 
@@ -99,16 +100,16 @@
 				<?php foreach($data as $ca){ ?>
 				<dt>
 					<article class="progress">
-						<section class="progress-bar" style="width: <?php echo ($ca['points']*100)/$hpoint;?>%;"></section>
+						<section class="progress-bar" style="width: <?php echo ($ca['score']*100)/$hpoint;?>%;"></section>
 					</article>
 				</dt>
 				<dd>
 					<div class="leaderboard-name"><?php echo $ca['first_name']." ".$ca['last_name']." : ". $ca['anweshaid']; ?></div>
-					<div class="leaderboard-value"><?php echo $ca['points']; ?></div>
+					<div class="leaderboard-value"><?php echo $ca['score']; ?></div>
 				</dd>
 				<?php } ?>
 				
-				<dt>
+				<!-- <dt>
 					<article class="progress">
 						<section class="progress-bar" style="width: 65%;"></section>
 					</article>
@@ -143,7 +144,7 @@
 				<dd>
 					<div class="leaderboard-name">Martin Geiger</div>
 					<div class="leaderboard-value">10.235</div>
-				</dd>
+				</dd> -->
 			</dl>
 		</section>
 	</div>
