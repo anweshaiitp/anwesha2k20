@@ -1,8 +1,8 @@
 <?php 
     include("functions/init.php"); 
-    // if(!logged_in()){
-    //     redirect("signup.php");
-    // }
+    if(!logged_in()){
+        redirect("signup.php");
+    }
     $anweshaid; $imgsrc;$rank = 1;$hpoint;
     if(isset($_SESSION['anweshaid'])){
         $anweshaid = $_SESSION['anweshaid'];
@@ -42,8 +42,8 @@
 	<div class="card">
 		<section class="card-info card-section">
 			<!-- <i class="ion-navicon menu"></i> -->
-			<a style="color: #fff;" href="../../ca/ca.php"><i class="ion-ios-home menu"></i></a>
-			<a style="color: #fff;" href="./logout.php"><i class="ion-log-out search"></i></a>
+			<a style="color: #fff;" title="Home" aria-lable="Home" href="../../ca/ca.php"><i class="ion-ios-home menu"></i></a>
+			<a style="color: #fff;" title="Logout" aria-lable="Logout" href="./logout.php"><i class="ion-log-out search"></i></a>
 			<div class="avatar row">
 			</div>
 
