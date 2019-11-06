@@ -9,7 +9,13 @@ function slideLeftIn() {
 }
 
 function shake() {
-  $(".password-row").velocity("callout.shake");
+  // let content = $('form').serializeArray();
+  // content.forEach(e => {
+  //   if(e.value == ""){
+  //     $(".username-row").velocity("callout.shake");
+  //   }
+  // });
+  // $(".username-row").velocity("callout.shake");
 }
 
 slideUpIn();

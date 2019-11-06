@@ -1510,8 +1510,7 @@ h3.entry-title {
 
 .stay-in{
 	/* background: none no-repeat scroll 0 0 #4d4d4d; */
-	background-image: url("../images/contact-bg.jpg");
-	/* padding: 40px 0 60px; */
+	background-image: url("../images/contact-bg.jpg"); /* padding: 40px 0 60px; */
 }
 
 .wrapper-stay-in {
