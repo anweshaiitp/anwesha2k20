@@ -120,6 +120,8 @@
           Sign In
           </a>
           <?php } ?>
+          <p style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1f;">Don't have an account ?</p>
+          <a href="../backend/user/casignup.php" style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1;">Sign Up now !!</a>
         </div>
       </div>
       <div class="row w-row">
@@ -523,6 +525,8 @@
           Sign In
           </a>
           <?php } ?>
+          <p style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1f;">Don't have an account ?</p>
+          <a href="../backend/user/casignup.php" style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1;">Sign Up now !!</a>
         </div>
       </div>
     </div>
