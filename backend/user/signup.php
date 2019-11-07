@@ -35,6 +35,7 @@ if (logged_in()) {
           <!-- <a href="#" color>Forgot your password?</a> -->
           <button type="submit" name="login" id="login" >Sign In</button><br>
           <a href="./resend_alink.php"><span class="btn">Resend Activation Link</span></a><br>
+          <a href="./password.php"><span class="btn">Forgot Password</span></a><br>
           <p style="margin:0;">Don't have an account?</p>
           <p style="margin:0;"><a href="./casignup.php" style="color: #fff;">SignUp now !!</a></p>
         </form>
