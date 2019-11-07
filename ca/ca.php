@@ -205,22 +205,14 @@
     <div class="container w-container">
       <p class="paragraph" style="background-color: #fff;color: #000;padding: 10px;width: 100px;text-align: center;">About</p>
       <div class="row w-row">
-        <div class="column w-col w-col-8">
-          <h1 class="heading-5">Anwesha is a Techno-Cultural extravaganza held every year in spring. Since its inception
-            in 2010, it
-            has grown into one of the most anticipated student-organized youth<br>festival.</h1>
+      <div class="column w-col w-col-8">
+          <h1 class="heading-5">Anwesha is the annual fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India.</h1>
         </div>
         <div class="column-2 w-col w-col-4">
-          <p class="paragraph-3" style="font-size: 14px;"> From NASA Scientists
-            to Dancing Idols, from Ethical Hackers to Heartthrob Singers, from Game Development to Gaming Wars,
-            from Robotics to Dramatics, from Model United Nations to Foreign Exchange Conferences, from Sufi to
-            Death Metal, Anwesha, with the tag "Think Dream Live", promises every youth to full-fill his/her
-            dreams to the maximum. It involves student volunteers who work by interest and promote
-            intellectualism and creativity through their organization and maintain the brand value of IIT.
-            Anwesha meaning "Quest" in Sanskrit has been a quest for every participant to reach his full
-            potential. Its latest edition received participation around 5000 and footfall of around 20000
-            involving many computer geeks, gaming freaks, technoholics, music & dance maniacs and rock bands
-            hailing from well-known institutes across the country.</p>
+          <p class="paragraph-3" style="font-size: 14px;">Anwesha has been steadily expanding its roots ever since it came into existence and has created an indelible impression in the minds and hearts of each one of those involved with it.
+          Anwesha, which is the Sanskrit word for "Quest", aptly justifies it purpose as the ultimate quest for talent and potential. We believe in turning  moments into memories worth cherishing for a lifetime. The 3-day extravaganza achieves just that by providing experiences that permanently etch themselves into the slate of your memory board to last for aeons to come.
+          With the ever-inspiring motto of "Think. Dream. Live." Anwesha urges every individual to push themselves to the maximum. With acclaimed celebrities, eminent speakers and international artists in the likes of Raghu Dixit, Sundeep Sharma, Sahil Shah, Nitish Kumar, Ravi Shankar, Jack Eye Jones having graced its stage, Anwesha has always been the haven for utmost fun and entertainment and has been continually living manifolds beyond what is expected of it. We receive an ever-increasing footfall every year, with the last edition witnessing a massive number of 10,000, involving enthusiasts hailing from all domains.
+        </p>
         </div>
       </div>
       <div class="w-row">
@@ -230,7 +222,7 @@
             alt="Dann Petty Signature" class="image-5"> -->
         </div>
         <div class="w-col w-col-4">
-          <div class="div-block"><img src="images/logo_favi.png" width="287" alt="Dann Petty image"
+          <div class="div-block"><img src="../backend/user/images/circle-cropped.png" width="225" alt="Dann Petty image"
               class="image-4"><img src="images/WEB1.png" width="383" data-w-id="eaf60bd2-f14c-9a3e-df5f-c739f68e4a67">
           </div>
         </div>
