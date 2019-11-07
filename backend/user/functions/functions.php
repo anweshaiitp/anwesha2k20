@@ -795,3 +795,114 @@ function user_details($anweshaid){
 	}
 	return $data;
 }
+
+// reset password if forgotten
+
+function resetPassword(){
+	if($_SERVER['REQUEST_METHOD']=="POST"){
+		$email=clean($_POST['username']); // Email id of the user
+		$password=clean($_POST['password']);
+		$confirm=clean($_POST['confirm']);
+		if(!email_exists($email)){
+			$errors[]="Given email does not exist";
+		}
+		if($password!=$confirm){
+			$errors[]="Given password and confirm passowrd do not match";
+		}
+
+		if(!empty($errors)){
+			foreach($errors as $error){
+				echo validation_errors($error);
+			}
+		}else{
+			$sql="SELECT * FROM users WHERE email='$email'";
+			$result=query($sql);
+			$row=fetch_array($result);
+			$anweshaid=$row['anweshaid'];	
+			$validation_code=md5($anweshaid.microtime());	
+			$sql1="UPDATE users SET validation_code='$validation_code' , password ='$password',active=0 WHERE email='$email'";
+			$result1=query($sql1);
+			confirm($result1);
+			$activation_link="https://anwesha.info/backend/user/respassword.php?email=$email&code=$validation_code";
+			if(isUserCA($email)){
+				$sql2="UPDATE ca_users SET validation_code='$validation_code' ,password='$password',active=0 WHERE email='$email'";
+				$result2=query($sql2);
+				$activation_link="https://anwesha.info/backend/user/respassword.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20";
+			}
+
+			$subject="Password Reset";
+			$msg="<p>
+			Please click the link below to reset your Anwesha account password.<br/>
+				<a href='$activation_link'>$activation_link</a>
+				</p>
+			";
+			$header="From: noreply@yourwebsite.com";
+			if(send_email($email,$subject,$msg,$header)){
+				$message[]="Confirmation mail has successfully been sent to your account. Please open it to change password";
+				$response['status']=200;
+				set_message("<p class='bg-success'> Confirmation mail has successfully been sent to your account. Please open it to change password</p>");
+				echo json_encode($response['message'][0]);
+				redirect("display.php");
+			}else{
+				$message[]="Mail could not be sent. Please try again";
+				$response['status']=208;					
+			}
+			$response['message']=$message;
+			echo json_encode($response['message'][0]);
+		}
+	}
+}
+
+function conf_pass_change(){
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		if (isset($_GET['email'])) {
+			echo $email=clean($_GET['email']);
+			echo $validation_code=clean($_GET['code']);
+
+			$sql="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
+			$result=query($sql);
+			confirm($result);
+
+			if(row_count($result)==1){
+				$sql2="UPDATE users SET active = 1, validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
+				$result2=query($sql2);
+				confirm($result2);
+				
+				// Fetching details
+				$row=fetch_array($result);
+				$anweshaid=$row['anweshaid'];
+				$qrcode=$row['qrcode'];
+				$is_ca=false;
+				$first_name=$row['first_name'];
+
+				// To activate ca register table
+				if(isset($_GET['ca'])){
+					$ca =clean($_GET['ca']);
+					if($ca =="campus_ambassador_anwesha2k20"){
+						$sql1="SELECT id FROM ca_users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
+						$result1=query($sql1);
+						confirm($result1);
+						$is_ca=true;
+
+						if(row_count($result1)==1){
+							$sql3="UPDATE ca_users SET active = 1, validation_code = 0, score = 100 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
+							$result3=query($sql3);
+							confirm($result3);
+						}
+					}
+				}
+				set_message("<p class='bg-success'> Password has been successfully reset</p>");
+				
+
+				redirect("display.php");
+				return json_encode("400");//Success
+			}
+			else{
+				set_message("<p class='bg-danger'> Your account password could not be changed.</p>");
+				return json_encode("404");//Failed
+			}
+		}
+
+	}	
+}
+
