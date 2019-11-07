@@ -27,6 +27,25 @@
     type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
   <link href="./images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="./images/favicon.ico" rel="apple-touch-icon">
+  <style>
+    a.mostrandomshittyname {
+        color: black;
+        border: none;
+		margin: 20px;
+        padding: 10px 20px;
+		display: inline-block;
+        font: bold 18px sans-serif;
+        background: white;
+		text-decoration: none;
+        -webkit-transition: background 1s; /* For Safari 3.0 to 6.0 */	
+        transition: background 1s; /* For modern browsers */
+        transition: color 1s;
+    }
+    a.mostrandomshittyname:hover {
+        background: #33f6f3; ;
+        color: white;
+    }
+</style>
 </head>
 
 <body>
@@ -90,50 +109,16 @@
             <div class="text-block-2">Indian Institute of Technology Patna</div>
           </div>
           <?php if($loggedIn){ ?>
-          <a href="../backend/user/profile.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="button w-inline-block">
-            <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Profile</div>
-            <div data-w-id="dec207ba-d0c3-a695-5d15-0d7a2b8b4976"
-              style="-webkit-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform-style:preserve-3d"
-              class="text-block-3 absolute w-hidden-tiny">Profile</div>
-            <div data-w-id="2e8b38f7-d565-5501-bf0e-66bbdd95eede"
-              style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-              class="absolute-block"></div>
+          <a class="mostrandomshittyname" href="../backend/user/profile.php">
+            Profile
           </a>
-          <a href="../backend/user/logout.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="button w-inline-block">
-            <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Logout</div>
-            <div data-w-id="dec207ba-d0c3-a695-5d15-0d7a2b8b4976"
-              style="-webkit-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform-style:preserve-3d"
-              class="text-block-3 absolute w-hidden-tiny">Logout</div>
-            <div data-w-id="2e8b38f7-d565-5501-bf0e-66bbdd95eede"
-              style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-              class="absolute-block"></div>
+          <a class="mostrandomshittyname" href="../backend/user/logout.php">
+          Logout
           </a>
           <?php }else{ ?>
-          <a href="../backend/user/signup.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="button w-inline-block">
-            <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Sign In</div>
-            <div data-w-id="dec207ba-d0c3-a695-5d15-0d7a2b8b4976"
-              style="-webkit-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform-style:preserve-3d"
-              class="text-block-3 absolute w-hidden-tiny">Sign IN</div>
-            <div data-w-id="2e8b38f7-d565-5501-bf0e-66bbdd95eede"
-              style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-              class="absolute-block"></div>
+          <a class="mostrandomshittyname" href="../backend/user/signup.php">
+          Sign In
           </a>
-          <div data-w-id="9bbb9d1f-f7cf-8e12-e15e-cb32e4091a01"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="div-block-3">
-            <p class="centered-hero-text">Don't have an account yet.</p>
-            <a href="../backend/user/casignup.php" data-w-id="566087ad-a504-bd1c-b331-c34b8858bbc2"
-              class="div-block-4 w-inline-block">
-              <div class="centered-hero-text">Sign Up now !!</div>
-              <div data-w-id="20ae54f5-ad47-d5ad-848a-45eabfc1b1e2" class="link-line"></div>
-            </a>
-          </div>
           <?php } ?>
         </div>
       </div>
@@ -527,50 +512,16 @@
         </div>
         <div class="column-2 w-col w-col-4">
         <?php if($loggedIn){ ?>
-          <a href="../backend/user/profile.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="button w-inline-block">
-            <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Profile</div>
-            <div data-w-id="dec207ba-d0c3-a695-5d15-0d7a2b8b4976"
-              style="-webkit-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform-style:preserve-3d"
-              class="text-block-3 absolute w-hidden-tiny">Profile</div>
-            <div data-w-id="2e8b38f7-d565-5501-bf0e-66bbdd95eede"
-              style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-              class="absolute-block"></div>
+          <a class="mostrandomshittyname" href="../backend/user/profile.php">
+            Profile
           </a>
-          <a href="../backend/user/logout.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="button w-inline-block">
-            <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Logout</div>
-            <div data-w-id="dec207ba-d0c3-a695-5d15-0d7a2b8b4976"
-              style="-webkit-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform-style:preserve-3d"
-              class="text-block-3 absolute w-hidden-tiny">Logout</div>
-            <div data-w-id="2e8b38f7-d565-5501-bf0e-66bbdd95eede"
-              style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-              class="absolute-block"></div>
+          <a class="mostrandomshittyname" href="../backend/user/logout.php">
+          Logout
           </a>
           <?php }else{ ?>
-          <a href="../backend/user/signup.php" data-w-id="e64a0eb4-fc31-02cb-2357-88ac4ff0b154"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="button w-inline-block">
-            <div data-w-id="e80811be-5d99-954c-9b08-a2eafc168511" class="text-block-3">Sign In</div>
-            <div data-w-id="dec207ba-d0c3-a695-5d15-0d7a2b8b4976"
-              style="-webkit-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(0) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(90DEG) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform-style:preserve-3d"
-              class="text-block-3 absolute w-hidden-tiny">Sign IN</div>
-            <div data-w-id="2e8b38f7-d565-5501-bf0e-66bbdd95eede"
-              style="-webkit-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(110%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0)"
-              class="absolute-block"></div>
+          <a class="mostrandomshittyname" href="../backend/user/signup.php">
+          Sign In
           </a>
-          <div data-w-id="9bbb9d1f-f7cf-8e12-e15e-cb32e4091a01"
-            style="-webkit-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-moz-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);-ms-transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);transform:translateX(0) translateY(100%) translateZ(0) scaleX(1) scaleY(1) scaleZ(1) rotateX(0) rotateY(0) rotateZ(0) skewX(0) skewY(0);opacity:0"
-            class="div-block-3">
-            <p class="centered-hero-text">Don't have an account yet.</p>
-            <a href="../backend/user/casignup.php" data-w-id="566087ad-a504-bd1c-b331-c34b8858bbc2"
-              class="div-block-4 w-inline-block">
-              <div class="centered-hero-text">Sign Up now !!</div>
-              <div data-w-id="20ae54f5-ad47-d5ad-848a-45eabfc1b1e2" class="link-line"></div>
-            </a>
-          </div>
           <?php } ?>
         </div>
       </div>
