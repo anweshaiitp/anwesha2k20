@@ -363,8 +363,16 @@ function activate_user(){
 
 			$sql="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 			$result=query($sql);
+			$sql4="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code=0 ";
+			//$sql4="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code=0");
+			$result4=query($sql4);
+			if(row_count($result4)){
+				$row4=fetch_array($result4);
+				set_message("Link has expired. The given account has already expired");
+				redirect("display.php");
+				return json_encode("400");//Success
+			}
 			confirm($result);
-
 			if(row_count($result)==1){
 				$sql2="UPDATE users SET active = 1, validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
 				$result2=query($sql2);
@@ -801,15 +809,9 @@ function user_details($anweshaid){
 function resetPassword(){
 	if($_SERVER['REQUEST_METHOD']=="POST"){
 		$email=clean($_POST['username']); // Email id of the user
-		$password=clean($_POST['password']);
-		$confirm=clean($_POST['confirm']);
 		if(!email_exists($email)){
 			$errors[]="Given email does not exist";
 		}
-		if($password!=$confirm){
-			$errors[]="Given password and confirm passowrd do not match";
-		}
-
 		if(!empty($errors)){
 			foreach($errors as $error){
 				echo validation_errors($error);
@@ -820,12 +822,12 @@ function resetPassword(){
 			$row=fetch_array($result);
 			$anweshaid=$row['anweshaid'];	
 			$validation_code=md5($anweshaid.microtime());	
-			$sql1="UPDATE users SET validation_code='$validation_code' , password ='$password',active=0 WHERE email='$email'";
+			$sql1="UPDATE users SET validation_code='$validation_code' WHERE email='$email'";
 			$result1=query($sql1);
 			confirm($result1);
 			$activation_link="https://anwesha.info/backend/user/respassword.php?email=$email&code=$validation_code";
 			if(isUserCA($email)){
-				$sql2="UPDATE ca_users SET validation_code='$validation_code' ,password='$password',active=0 WHERE email='$email'";
+				$sql2="UPDATE ca_users SET validation_code='$validation_code' WHERE email='$email'";
 				$result2=query($sql2);
 				$activation_link="https://anwesha.info/backend/user/respassword.php?email=$email&code=$validation_code&ca=campus_ambassador_anwesha2k20";
 			}
@@ -854,55 +856,52 @@ function resetPassword(){
 }
 
 function conf_pass_change(){
+	$isCa=0;
 	if($_SERVER['REQUEST_METHOD']=="GET"){
 		if (isset($_GET['email'])) {
-			echo $email=clean($_GET['email']);
-			echo $validation_code=clean($_GET['code']);
+			$email=clean($_GET['email']);
+			$validation_code=clean($_GET['code']);
 
 			$sql="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 			$result=query($sql);
 			confirm($result);
 
 			if(row_count($result)==1){
-				$sql2="UPDATE users SET active = 1, validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
-				$result2=query($sql2);
-				confirm($result2);
-				
-				// Fetching details
-				$row=fetch_array($result);
-				$anweshaid=$row['anweshaid'];
-				$qrcode=$row['qrcode'];
-				$is_ca=false;
-				$first_name=$row['first_name'];
-
-				// To activate ca register table
-				if(isset($_GET['ca'])){
-					$ca =clean($_GET['ca']);
-					if($ca =="campus_ambassador_anwesha2k20"){
-						$sql1="SELECT id FROM ca_users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
-						$result1=query($sql1);
-						confirm($result1);
-						$is_ca=true;
-
-						if(row_count($result1)==1){
-							$sql3="UPDATE ca_users SET active = 1, validation_code = 0, score = 100 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
-							$result3=query($sql3);
-							confirm($result3);
-						}
+					if(isset($_GET['ca'])){
+						$isCa=1;
 					}
-				}
-				set_message("<p class='bg-success'> Password has been successfully reset</p>");
-				
-
-				redirect("display.php");
-				return json_encode("400");//Success
 			}
 			else{
-				set_message("<p class='bg-danger'> Your account password could not be changed.</p>");
+				set_message("<p class='bg-danger'> Your link has expired. Please try again for password change.</p>");
+				redirect("display.php");
 				return json_encode("404");//Failed
 			}
 		}
 
+	}
+	if($_SERVER['REQUEST_METHOD']=="POST"){
+		if(isset($_POST['submit'])){
+			$pass=clean($_POST['password']);
+			$confirm=clean($_POST['confirm']);
+			if($pass!=$confirm){
+				$errors[]="Given inputs do not match";
+			}
+			if(!empty($errors)){
+				foreach($errors as $error){
+					echo validation_errors($error);
+				}
+			}else{
+				$pass=md5($pass);
+				$sql2="UPDATE users SET password ='$pass', validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
+				$result2=query($sql2);
+				confirm($result2);
+				if($isCa){
+					$sql3="UPDATE ca_users SET password ='$pass', validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
+					$result3=query($sql3);
+					confirm($result3);	
+				}
+			}
+		}
 	}	
 }
 
