@@ -5,7 +5,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Anwesha CA | Resend Activation Link</title>
+  <title>Anwesha CA | Reset Password</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
 
@@ -35,15 +35,9 @@
             <div class="username-row row">
                 <input class="white-text" required type="text" placeholder="Email ID" name="username" id="username" />
             </div>
-            <div class="username-row row">
-                <input class="white-text" required type="password" placeholder="New Password" name="password" id="password" />
-            </div>
-            <div class="username-row row">
-                <input class="white-text" required type="password" placeholder="Confirm New Password" name="confirm" id="confirm" />
-            </div>
         </div>
         <div class="call-to-action">
-            <button  type="submit">Confirm</button>
+            <button  type="submit">Submit</button>
             <p>Already have an account ? <a href="./signup.php">Sign in now !!</a></p>
         </div>
     </form>
