@@ -79,9 +79,9 @@
 			</section>
 
 			<!-- <div class="dial">
-				<h2 class="dial-title">
-				<?php// echo $profile['ca']['score']/100; ?>
-				</h2>
+				<h2 class="dial-title">-->
+				<!---->
+				<!--</h2>
 				<h3 class="dial-value">
 					Level
 				</h3>

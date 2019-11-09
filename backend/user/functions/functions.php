@@ -366,7 +366,7 @@ function activate_user(){
 			$sql4="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code=0 ";
 			//$sql4="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code=0");
 			$result4=query($sql4);
-			if(row_count($result4)){
+			if(row_count($result4)==1){
 				$row4=fetch_array($result4);
 				set_message("Link has expired. The given account has already expired");
 				redirect("display.php");
@@ -407,17 +407,17 @@ function activate_user(){
 				$header="From: noreply@yourwebsite.com";
 
 				if($is_ca==true){
-					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. Your ca referral id is: <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
+					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. Your ca referral id is: <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode' width='60%'/></p>");
 					$msg="<p>
 					Hi $first_name, you have successfully completed your CA registration process.<br>
 					Your anweshaid is : <b>$anweshaid</b><br>
 					Your referral id is: <b>$anweshaid</b><br>
-					Your qr code is: <img src='$qrcode'>
+					Your qr code is: <img src='$qrcode' width='60%'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
 					</p>
 					";
 				}else{
-					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode'/></p>");
+					set_message("<p class='bg-success'> Your account has been activated.<br> Your anweshaid is <b>$anweshaid</b>. <br> Your qr code is <br> <img src='$qrcode' width='60%'/></p>");
 					$msg="<p>
 					Hi $first_name, you have successfully created a Anwesha Account.<br>
 					Your anweshaid is : <b>$anweshaid</b><br>
