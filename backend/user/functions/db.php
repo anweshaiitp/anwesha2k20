@@ -35,6 +35,7 @@ function confirm($result){
 	if(!$result){
 		die("QUERY FAILED". mysqli_error($con)."<br/>");
 	}
+	return true;
 }
 
 ?>

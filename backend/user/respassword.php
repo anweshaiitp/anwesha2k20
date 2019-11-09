@@ -36,11 +36,11 @@
                 <input class="white-text" required type="password" placeholder="New Password" name="password" id="password" />
             </div>
             <div class="username-row row">
-                <input class="white-text" required type="password" placeholder="Confirm New Password" name="confirm" id="confirm" />
+                <input class="white-text" required type="password" placeholder="Confirm New Password" name="pass1" id="pass1" />
             </div>
         </div>
         <div class="call-to-action">
-            <button  type="submit">Submit</button>
+            <button  type="submit" name="submit">Submit</button>
             <p>Already have an account ? <a href="./signup.php">Sign in now !!</a></p>
         </div>
     </form>

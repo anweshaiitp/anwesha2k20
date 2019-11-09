@@ -363,12 +363,12 @@ function activate_user(){
 
 			$sql="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 			$result=query($sql);
-			$sql4="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code=0 ";
+			$sql4="SELECT * FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='0' ";
 			//$sql4="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code=0");
 			$result4=query($sql4);
-			if(row_count($result4)==1){
+			if(row_count($result4)){
 				$row4=fetch_array($result4);
-				set_message("Link has expired. The given account has already expired");
+				set_message("Link has expired. The given account has already been activated");
 				redirect("display.php");
 				return json_encode("400");//Success
 			}
@@ -856,33 +856,40 @@ function resetPassword(){
 }
 
 function conf_pass_change(){
-	$isCa=0;
 	if($_SERVER['REQUEST_METHOD']=="GET"){
-		if (isset($_GET['email'])) {
+// 		$message = "wg answer";
+// echo "<script type='text/javascript'>alert('$message');</script>";
+		if (isset($_GET['email'])&&isset($_GET['code'])) {
 			$email=clean($_GET['email']);
 			$validation_code=clean($_GET['code']);
-
 			$sql="SELECT id, anweshaid, qrcode, first_name FROM users WHERE email='".escape($_GET['email'])."' AND validation_code='".escape($_GET['code'])."' ";
 			$result=query($sql);
 			confirm($result);
 
 			if(row_count($result)==1){
+				$_SESSION['pass_isca_res']=0;
 					if(isset($_GET['ca'])){
 						$isCa=1;
+						$_SESSION['pass_isca_res']=1;
 					}
+					$_SESSION['pass_email_res']=$email;
+					$_SESSION['pass_code_res']=$validation_code;
 			}
 			else{
 				set_message("<p class='bg-danger'> Your link has expired. Please try again for password change.</p>");
 				redirect("display.php");
-				return json_encode("404");//Failed
+				return json_encode("208");//Failed
 			}
+		}else{
+			set_message("<p class='bg-danger'> Access denied</p>");
+			redirect("display.php");
+			return json_encode("404");//Failed			
 		}
 
 	}
 	if($_SERVER['REQUEST_METHOD']=="POST"){
-		if(isset($_POST['submit'])){
 			$pass=clean($_POST['password']);
-			$confirm=clean($_POST['confirm']);
+			$confirm=clean($_POST['pass1']);
 			if($pass!=$confirm){
 				$errors[]="Given inputs do not match";
 			}
@@ -891,17 +898,40 @@ function conf_pass_change(){
 					echo validation_errors($error);
 				}
 			}else{
+				// $message = "wrong answer".$_SESSION['pass_email_res']." ".$_SESSION['pass_code_res'];
+				// echo "<script type='text/javascript'>alert('$message');</script>";
+				if(!isset($_SESSION['pass_email_res'])||!isset($_SESSION['pass_code_res'])){
+					set_message("<p class='bg-danger'> Please go back to forgot password page. Given credentials do not exist</p>");
+					redirect("display.php");
+					return json_encode("404");//Failed
+				}
 				$pass=md5($pass);
-				$sql2="UPDATE users SET password ='$pass', validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
+				$sql2="UPDATE users SET validation_code = '0',password='".$pass."' WHERE email='".escape($_SESSION['pass_email_res'])."' AND validation_code='".escape($_SESSION['pass_code_res'])."' ";
 				$result2=query($sql2);
+				if($_SESSION['pass_isca_res']){
+					$sql3="UPDATE ca_users SET validation_code = '0' WHERE email='".escape($_SESSION['pass_email_res'])."' AND validation_code='".escape($_SESSION['pass_code_res'])."' ";
+					$result3=query($sql3);	
+				}
 				confirm($result2);
-				if($isCa){
-					$sql3="UPDATE ca_users SET password ='$pass', validation_code = 0 WHERE email='".escape($email)."' AND validation_code='".escape($validation_code)."' ";
-					$result3=query($sql3);
-					confirm($result3);	
+				if(confirm($result2)){
+					set_message("<p class='bg-danger'>Your password has been successfully reset.</p>");
+					redirect("display.php");
+					return json_encode("201");//Failed
+				}else{
+					set_message("<p class='bg-danger'>Your password was not able to reset.</p>");
+					redirect("display.php");
+					return json_encode("208");//Failed
 				}
 			}
-		}
 	}	
 }
 
+// if(row_count($result2)){
+// 	set_message("<p class='bg-danger'>Your password has been successfully reset.</p>");
+// 	redirect("display.php");
+// 	return json_encode("201");//Failed
+// }else{
+// 	set_message("<p class='bg-danger'>Your password was not able to reset.</p>");
+// 	redirect("display.php");
+// 	return json_encode("201");//Failed
+// }
