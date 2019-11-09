@@ -119,9 +119,10 @@
           <a class="mostrandomshittyname" href="../backend/user/signup.php">
           Sign In
           </a>
+          <a class="mostrandomshittyname" href="../backend/user/casignup.php">
+          Sign Up
+          </a>
           <?php } ?>
-          <p style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1f;">Don't have an account ?</p>
-          <a href="../backend/user/casignup.php" style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1;">Sign Up now !!</a>
         </div>
       </div>
       <div class="row w-row">
@@ -193,7 +194,7 @@
       <p class="paragraph" style="background-color: #fff;color: #000;padding: 10px;width: 100px;text-align: center;">About</p>
       <div class="row w-row">
       <div class="column w-col w-col-8">
-          <h1 class="heading-5">Anwesha is the annual fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India.</h1>
+          <h1 class="heading-5">Anwesha is the annual cultural fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India. </h1>
         </div>
         <div class="column-2 w-col w-col-4">
           <p class="paragraph-3" style="font-size: 14px;">Anwesha has been steadily expanding its roots ever since it came into existence and has created an indelible impression in the minds and hearts of each one of those involved with it.
@@ -524,9 +525,10 @@
           <a class="mostrandomshittyname" href="../backend/user/signup.php">
           Sign In
           </a>
+          <a class="mostrandomshittyname" href="../backend/user/casignup.php">
+          Sign Up
+          </a>
           <?php } ?>
-          <p style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1f;">Don't have an account ?</p>
-          <a href="../backend/user/casignup.php" style="padding-left:20px;color:#fff;text-shadow: 2px 2px 4px #1f1f1;">Sign Up now !!</a>
         </div>
       </div>
     </div>

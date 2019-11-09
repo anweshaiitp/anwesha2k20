@@ -31,7 +31,7 @@ if (logged_in()) {
           <?php display_message() ?>
           <?php login_signup() ?>
           <input class="not-radio" id="anweshaid" name="anweshaid" required="required" placeholder="Anwesha ID" />
-          <input class="not-radio" type="password" id="password" name="password" required="required" placeholder="Password" />
+          <input class="not-radio" type="password" id="password" name="password" required="required" placeholder="Password" /><br/>
           <!-- <a href="#" color>Forgot your password?</a> -->
           <button type="submit" name="login" id="login" >Sign In</button><br>
           <a href="./resend_alink.php"><span class="btn">Resend Activation Link</span></a><br>
