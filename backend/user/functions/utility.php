@@ -10,17 +10,17 @@ function send_email($email,$subject,$msg,$headers){
 	//$mail->SMTPDebug = 4;                               // Enable verbose debug output
 
 	$mail->isSMTP();                                      // Set mailer to use SMTP
-	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+	$mail->Host = 'tls://smtp.gmail.com';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = "vsubhang4@gmail.com";                 // SMTP username
+	$mail->Username = "email";                 // SMTP username
 	$mail->Password = "password"; 
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-	$mail->Port = 587;                                    // TCP port to connect to
+	$mail->Port = 587;                                       // TCP port to connect to
 
-	$mail->setFrom('pranaykgupta21@gmail.com', 'Anwesha2k20');
+	$mail->setFrom('curator@anwesha.info', 'Anwesha2k20');
 	$mail->addAddress($email);     // Add a recipient
 	//$mail->addAddress('ellen@example.com');               // Name is optional
-	$mail->addReplyTo('pranaykgupta21@gmail.com', 'Information');
+	$mail->addReplyTo('curator@anwesha.info', 'Information');
 	//$mail->addCC('cc@example.com');
 	//$mail->addBCC('bcc@example.com');
 

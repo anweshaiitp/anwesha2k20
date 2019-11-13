@@ -423,7 +423,9 @@ function activate_user(){
 					Your anweshaid is : <b>$anweshaid</b><br>
 					Your qr code is: <img src='$qrcode'>
 					Or click here to get your qrcode : <a href='$qrcode'>$qrcode</a>
-					</p>
+					</p><br>
+					<h3>Note</h3><br>
+					<h6>All sort of promotions done by you for the Anwesha'20 should be shared in form of screenshot on a WhatsApp group in which you will be added by Team Anwesha'20, IIT Patna.</h6>
 					";
 				}
 				

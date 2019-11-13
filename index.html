@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta charset="utf-8">
-    <title>Anwesha2k20</title>
+    <title>Anwesha_beta</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="css/animate.min.css" rel="stylesheet" >	
@@ -16,7 +16,7 @@
 	<link href="css/colors/blue.css" rel="stylesheet" class="colors">
 	<link rel="stylesheet" type="text/css" href="css/finalcustomization.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link href="css/updates.css" type="text/css" rel="stylesheet">
+	<!--<link href="css/updates.css" type="text/css" rel="stylesheet">-->
 	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
 
 	<!-- Google Font -->
@@ -31,7 +31,139 @@
     <link rel="apple-touch-icon" sizes="114x114" href="images/ico/title_icon_114.png">
 	<link rel="apple-touch-icon" sizes="144x144" href="images/ico/title_icon_114.png">
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic);
 
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 1.5;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+}
+.heading-title {
+    margin-bottom: 100px;
+}
+.text-center {
+    text-align: center;
+}
+.heading-title h3 {
+    margin-bottom: 0;
+    letter-spacing: 2px;
+    font-weight: normal;
+}
+.p-top-30 {
+    padding-top: 30px;
+}
+.half-txt {
+    width: 60%;
+    margin: 0 auto;
+    display: inline-block;
+    line-height: 25px;
+    color: white;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.team-member, .team-member .team-img {
+    position: relative;
+}
+.team-member {
+    overflow: hidden;
+}
+.team-member, .team-member .team-img {
+    position: relative;
+}
+
+.team-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    border: 20px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.90);
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.team-member:hover .team-hover .desk {
+    top: 35%;
+}
+.team-member:hover .team-hover, .team-member:hover .team-hover .desk, .team-member:hover .team-hover .s-link {
+    opacity: 1;
+}
+.team-hover .desk {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    opacity: 0;
+    -webkit-transform: translateY(-55%);
+    -ms-transform: translateY(-55%);
+    transform: translateY(-55%);
+    -webkit-transition: all 0.3s 0.2s;
+    transition: all 0.3s 0.2s;
+    padding: 0 20px;
+}
+.desk, .desk h4, .team-hover .s-link a {
+    text-align: center;
+    color: #222;
+}
+.team-member:hover .team-hover .s-link {
+    bottom: 10%;
+}
+.team-member:hover .team-hover, .team-member:hover .team-hover .desk, .team-member:hover .team-hover .s-link {
+    opacity: 1;
+}
+.team-hover .s-link {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    text-align: center;
+    -webkit-transform: translateY(45%);
+    -ms-transform: translateY(45%);
+    transform: translateY(45%);
+    -webkit-transition: all 0.3s 0.2s;
+    transition: all 0.3s 0.2s;
+    font-size: 35px;
+}
+.desk, .desk h4, .team-hover .s-link a {
+    text-align: center;
+    color: #222;
+}
+.team-member .s-link a {
+    margin: 0 10px;
+    color: white;
+    font-size: 16px;
+}
+.team-title {
+    position: static;
+    padding: 20px 0;
+    display: inline-block;
+    letter-spacing: 2px;
+    width: 100%;
+}
+.team-title h5 {
+    margin-bottom: 0px;
+    display: block;
+    text-transform: uppercase;
+}
+.team-title span {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+}
+.contained{
+	background-color: black;
+}
+    </style>
 </head>
 
 <body data-spy="scroll" data-target="#mynav" data-offset="85">
@@ -70,13 +202,13 @@
 						<ul class="nav navbar-nav main-nav-list">
 							<li><a href="#home">Home</a></li>
 							<li><a href="#about">About</a></li>
-							<li><a href="./ca/ca.php" target="_blank">CA</a></li>							
+							<li><a href="https://www.anwesha.info/ca/ca.php" target="_blank">CA</a></li>							
 							<li><a href="#gallery">Gallery</a></li>
 							<li><a href="#aftermovie">Aftermovie</a></li>
 							<li><a href="#multitcity">Multicity</a></li>
 							<li><a href="#updates">Updates</a></li>
 							<li><a href="#celebs">Celebs</a></li>
-							<li><a href="#signup">Register</a></li>
+							<!--<li><a href="#signup">Register</a></li>-->
 							<li><a href="#contacts">Contact</a></li>						
 						</ul>
 					</div>		
@@ -96,15 +228,15 @@
   					<source src="./comingsoon/rain.mp4" type="video/mp4">
 				</video>
 				<div class="caption">
-					<h1 class="animated fadeInLeftBig">Welcome to <strong>Anwesha</strong></h1>
-					<p class="animated fadeInRightBig">IIT Patna's Annual Cultural Fest</p>
-					<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
+					<h1 class="animated fadeInLeftBig"><strong>Anwesha, IIT PATNA</strong></h1>
+					<p class="animated fadeInRightBig">For regular updates</p>
+					<a data-scroll class="learn-more animated fadeInUpBig" href="#updates">Click Here</a>
 				</div>
 			</div>
 			<div class="item" style="background-image: url(images/slider/BG-2.JPG)"> <!-- Change Image -->
 				<div class="caption">
 					<h1 class="animated fadeInLeftBig"><strong>Campus</strong> Ambassador</h1>
-					<p class="animated fadeInRightBig">Promote Us</p>
+					<p class="animated fadeInRightBig">Share What We Believe</p>
 					<a data-scroll class="learn-more animated fadeInUpBig" href="./ca/ca.php" target="_blank">Visit CA website</a>
 				</div>
 			</div>
@@ -132,7 +264,7 @@
 					<!-- About Us Icons -->
 					<div class="wrapper-why-us">
 						<div class="col-lg-12 col-sm-12 wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">
-							<p id="aboutDescription">Anwesha is the annual cultural fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India. Anwesha has been steadily expanding its roots ever since it came into existence and has created an indelible impression in the minds and hearts of each one of those involved with it. </p>
+							<p id="aboutDescription">Anwesha is the annual fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. We believe in turning  moments into memories worth cherishing for a lifetime. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India. Anwesha has been steadily expanding its roots ever since it came into existence and has created an indelible impression in the minds and hearts of each one of those involved with it. </p>
 							<p id="aboutDescription">Anwesha, which is the Sanskrit word for "Quest", aptly justifies it purpose as the ultimate quest for talent and potential. We believe in turning  moments into memories worth cherishing for a lifetime. The 3-day extravaganza achieves just that by providing experiences that permanently etch themselves into the slate of your memory board to last for aeons to come.</p>
 							<p id="aboutDescription">With the ever-inspiring motto of "Think. Dream. Live." Anwesha urges every individual to push themselves to the maximum. With acclaimed celebrities, eminent speakers and international artists in the likes of Raghu Dixit, Sundeep Sharma, Sahil Shah, Nitish Kumar, Ravi Shankar, Jack Eye Jones having graced its stage, Anwesha has always been the haven for utmost fun and entertainment and has been continually living manifolds beyond what is expected of it. We receive an ever-increasing footfall every year, with the last edition witnessing a massive number of 10,000, involving enthusiasts hailing from all domains.</p>
 						</div>
@@ -684,9 +816,13 @@
 					</div>
 					<div class="team-hover">
 						<div class="desk">
-							<h4>For more info please click on the <a href="pdfs/foxmula.pdf">link</a></h4>
 							<p>
-							   <!-- <div class="razorpay-embed-btn" data-url="https://rzp.io/l/anwesha" data-text="Pay Now" data-color="#190C07" data-size="small">
+							<h4>To enroll yourself follow the given steps:</h4>
+							<ol>
+								<li>Step1 : Register youself at <a href="https://www.foxmula.com">Foxmula</a></li>
+								<li>Step2 : Fill the given google form in the <a href="https://forms.gle/XPa2ZmUgpbqoxM2i7">link</a></li>
+								<li>Step3 : Click here for payment:</li>
+							   <div class="razorpay-embed-btn" data-url="https://rzp.io/l/anwesha" data-text="Pay Now" data-color="#190C07" data-size="small">
 								<script>
 								  (function(){
 									var d=document; var x=!d.getElementById('razorpay-embed-btn-js')
@@ -694,15 +830,17 @@
 									s.src='https://cdn.razorpay.com/static/embed_btn/bundle.js';d.body.appendChild(s);} else{var rzp=window['__rzp__'];
 									rzp && rzp.init && rzp.init()}})();
 								</script>
-							  </div> -->
+							  </div>
+							</ol>
 							</p>
+							<h4>For more info please click on the <a href="pdfs/foxmula.pdf">link</a></h4>
 						</div>
 						<div class="s-link">
 						</div>
 					</div>
 				</div>
 				<div class="team-title">
-					<h4>Training,Placement and Internship Workshop</h4>
+					<h4>Training,Placement and Internship</h4>
 					<span>in association with Foxmula</span>
 				</div>
 			</div>
@@ -718,13 +856,36 @@
 							</p>
 						</div>
 						<div class="s-link">
-							<a href="https://www.facebook.com/events/515951159247534/"><img src="https://img.icons8.com/android/24/000000/facebook-new.png"></i></a>
+							<a href="https://www.facebook.com/events/515951159247534/"><img src="https://img.icons8.com/android/24/000000/facebook-new.png" \></a>
+							<a href="https://www.instagram.com/p/B4LAEyAnLW7/"><img src="https://img.icons8.com/ios/24/000000/instagram-new.png" \></a>
 						</div>
 					</div>
 				</div>
 				<div class="team-title">
 					<h4>Technical Management Workshop</h4>
 					<span>in association with TechProLabz</span>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<div class="team-member">
+					<div class="team-img">
+						<img src="images/CA_poster.jpg" alt="ca" class="img-responsive resiz">
+					</div>
+					<div class="team-hover">
+						<div class="desk">
+							<a href="./ca/ca.php"><button class="btn btn-primary">Link to CA page</button></a>
+							<p>
+							</p>
+						</div>
+						<div class="s-link">
+							<a href="https://www.facebook.com/anwesha.iitpatna/photos/a.973019692730676/2819510188081608/?type=3&theater"><img src="https://img.icons8.com/android/24/000000/facebook-new.png" \></a>
+							<a href="https://www.instagram.com/p/B4w_UUVnKXM/"><img src="https://img.icons8.com/ios/24/000000/instagram-new.png" \></a>
+						</div>
+					</div>
+				</div>
+				<div class="team-title">
+					<h4>Campus Ambassador Program</h4>
+					<span></span>
 				</div>
 			</div>
 			<!-- <div class="col-md-4 col-sm-4">
@@ -1045,19 +1206,22 @@ End News Section -->
 									<i class="fa fa-comments" aria-hidden="true"></i>
 									<div class="">Nandan Shah</div>
 									<div class="">Marketing and Spons Head</div>
+									<div class="">nandanshah14@gmail.com</div>
 									<div>+91-8169154128</div>
 								</div>								
 								<div class="col-xs-4 wow fadeInRight" data-wow-duration="1s" data-wow-delay="450ms">	
 									<i class="fa fa-mobile-phone"></i>
 									<div class="">Kartik Singh</div>
 									<div class="">Media and PR Head</div>
+									<div class="">karthiksingh145@gmail.com</div>
 									<div>+91-8077516207</div>
 								</div>
 								<div class="col-xs-4 wow fadeInRight" data-wow-duration="1s" data-wow-delay="600ms">	
 									<i class="fa fa-comments" aria-hidden="true"></i>
 									<div class="">Hitvardhan</div>
 									<div class="">Marketing and Spons Head</div>
-									<div>+91-9304136122</div>
+									<div class="">vardhan.hit@gmail.com</div>
+									<div>+91-7761891077</div>
 								</div>								
 								
 							</div>								
