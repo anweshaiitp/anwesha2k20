@@ -122,6 +122,7 @@
           <a class="mostrandomshittyname" href="../backend/user/casignup.php">
           Sign Up
           </a>
+          <a class="mostrandomshittyname" href="../pdfs/CA_rulebook.pdf" download>Download CA rulebook</a>
           <?php } ?>
         </div>
       </div>
@@ -194,12 +195,12 @@
       <p class="paragraph" style="background-color: #fff;color: #000;padding: 10px;width: 100px;text-align: center;">About</p>
       <div class="row w-row">
       <div class="column w-col w-col-8">
-          <h1 class="heading-5">Anwesha is the annual cultural fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India. </h1>
+          <h1 class="heading-5">Anwesha is the annual  fest of IIT Patna with a myriad of events encompassing cultural, technical and management areas. We believe in turning  moments into memories worth cherishing for a lifetime. Since it's inception in 2010,  Anwesha has grown to be an epitome of grandiosity being one of the most anticipated student organized youth festival in all of North-East India. </h1>
         </div>
         <div class="column-2 w-col w-col-4">
-          <p class="paragraph-3" style="font-size: 14px;">Anwesha has been steadily expanding its roots ever since it came into existence and has created an indelible impression in the minds and hearts of each one of those involved with it.
-          Anwesha, which is the Sanskrit word for "Quest", aptly justifies it purpose as the ultimate quest for talent and potential. We believe in turning  moments into memories worth cherishing for a lifetime. The 3-day extravaganza achieves just that by providing experiences that permanently etch themselves into the slate of your memory board to last for aeons to come.
-          With the ever-inspiring motto of "Think. Dream. Live." Anwesha urges every individual to push themselves to the maximum. With acclaimed celebrities, eminent speakers and international artists in the likes of Raghu Dixit, Sundeep Sharma, Sahil Shah, Nitish Kumar, Ravi Shankar, Jack Eye Jones having graced its stage, Anwesha has always been the haven for utmost fun and entertainment and has been continually living manifolds beyond what is expected of it. We receive an ever-increasing footfall every year, with the last edition witnessing a massive number of 10,000, involving enthusiasts hailing from all domains.
+          <p class="paragraph-3" style="font-size: 14px;">Anwesha has been steadily expanding its roots ever since it came into existence and has created an indelible impression in the minds and hearts of each one of those involved with it. 
+            Anwesha, which is the Sanskrit word for "Quest", aptly justifies it purpose as the ultimate quest for talent and potential. We believe in turning  moments into memories worth cherishing for a lifetime. The 3-day extravaganza achieves just that by providing experiences that permanently etch themselves into the slate of your memory board to last for aeons to come.
+            With the ever-inspiring motto of "Think. Dream. Live." Anwesha urges every individual to push themselves to the maximum. With acclaimed celebrities, eminent speakers and international artists in the likes of Raghu Dixit, Sundeep Sharma, Sahil Shah, Nitish Kumar, Ravi Shankar, Jack Eye Jones having graced its stage, Anwesha has always been the haven for utmost fun and entertainment and has been continually living manifolds beyond what is expected of it. We receive an ever-increasing footfall every year, with the last edition witnessing a massive number of 10,000, involving enthusiasts hailing from all domains.
         </p>
         </div>
       </div>
@@ -528,6 +529,7 @@
           <a class="mostrandomshittyname" href="../backend/user/casignup.php">
           Sign Up
           </a>
+          <a class="mostrandomshittyname" href="../pdfs/CA_rulebook.pdf" download>Download CA rulebook</a>
           <?php } ?>
         </div>
       </div>

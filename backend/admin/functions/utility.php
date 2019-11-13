@@ -3,29 +3,24 @@
 function send_email($email,$subject,$msg,$headers){
 // 	return (mail($email,$subject,$msg,$headers));
 
-	// require "PHPMailerAutoload.php";
-	require_once('PHPMailerAutoload.php');
+	require "PHPMailerAutoload.php";
 
 	$mail = new PHPMailer;
 
 	//$mail->SMTPDebug = 4;                               // Enable verbose debug output
 
 	$mail->isSMTP();                                      // Set mailer to use SMTP
-	$mail->Host = 'smtp';  // Specify main and backup SMTP servers
+	$mail->Host = 'tls://smtp.gmail.com';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	// $mail->Username = "atmcelesta2k19@gmail.com";                 // SMTP username
-	// $mail->Password ="celesta@2k19";
-	// $mail->Username = "celesta2k19@gmail.com";                 // SMTP username
-	// $mail->Password = "celesta19@iitp.ac.in"; 
 	$mail->Username = "email";                 // SMTP username
 	$mail->Password = "password"; 
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-	$mail->Port = 587;                                    // TCP port to connect to
+	$mail->Port = 587;                                       // TCP port to connect to
 
-	$mail->setFrom('email', 'Anwesha2k20');
+	$mail->setFrom('curator@anwesha.info', 'Anwesha2k20');
 	$mail->addAddress($email);     // Add a recipient
 	//$mail->addAddress('ellen@example.com');               // Name is optional
-	$mail->addReplyTo('email', 'Information');
+	$mail->addReplyTo('curator@anwesha.info', 'Information');
 	//$mail->addCC('cc@example.com');
 	//$mail->addBCC('bcc@example.com');
 

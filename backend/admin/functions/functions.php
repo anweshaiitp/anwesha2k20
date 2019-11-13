@@ -55,8 +55,8 @@ function email_exists($email){
 	}
 }
 
-function celestaid_exist_present_user($celestaid){
-	$sql="SELECT id FROM present_users WHERE celestaid='$celestaid'";
+function anweshaid_exist_present_user($anweshaid){
+	$sql="SELECT id FROM present_users WHERE anweshaid='$anweshaid'";
 	$result=query($sql);
 	if(row_count($result)==1){
 		return true;
@@ -134,7 +134,7 @@ function show_users(){
 	if(!registrar_logged_in()){
 		redirect("login.php");
 	}elseif(getPermit()==0){
-		$sql="SELECT first_name, last_name, college, celestaid, phone, email, gender FROM users";
+		$sql="SELECT first_name, last_name, college, anweshaid, phone, email, gender FROM users";
 		$result=query($sql);
 		$permit=getPermit();
 
@@ -153,7 +153,7 @@ function show_accos(){
 	if(!registrar_logged_in()){
 		redirect("login.php");
 	}elseif($permit==0 || $permit==2 || $permit==5){
-		$sql="SELECT names, celestaid, phone, email, gender,day1,day2,day3,amount_paid FROM accommodation";
+		$sql="SELECT names, anweshaid, phone, email, gender,day1,day2,day3,amount_paid FROM accommodation";
 		$result=query($sql);
 		$permit=getPermit();
 
@@ -182,8 +182,8 @@ function checkAuthority(){
 function getUserCall(){
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 		if(isset($_POST['search_details'])){
-			$celestaid=escape($_POST['celestaid']);
-			return getDetails($celestaid);
+			$anweshaid=escape($_POST['anweshaid']);
+			return getDetails($anweshaid);
 		}else{
 			return false;
 		}
@@ -201,19 +201,19 @@ function validateUserAtDesk(){
 	}
 }
 
-// Function to retrieve data of the user from the entered celestaid
-function getDetails($celestaid){
+// Function to retrieve data of the user from the entered anweshaid
+function getDetails($anweshaid){
 
-	$sql="SELECT * FROM users WHERE celestaid='$celestaid'";
+	$sql="SELECT * FROM users WHERE anweshaid='$anweshaid'";
 	$result=query($sql);
 	confirm($result);
 	if(row_count($result)==1){
 		$row=fetch_array($result);
 
 		if($row['registration_desk']==1){
-			echo "<p class='bg-warning text-center'>$celestaid has already registered in the desk.</p>";
+			echo "<p class='bg-warning text-center'>$anweshaid has already registered in the desk.</p>";
 		}
-		$sql1="SELECT * FROM accommodation WHERE celestaid='$celestaid'";
+		$sql1="SELECT * FROM accommodation WHERE anweshaid='$anweshaid'";
 		$result1=query($sql1);
 		if(row_count($result1)==1){
 			$row1=fetch_array($result1);
@@ -225,7 +225,7 @@ function getDetails($celestaid){
 
 		return $row;
 	}else{
-		echo "<p class='bg-danger text-center'>$celestaid not found. Please enter correct celestaid.</p>";
+		echo "<p class='bg-danger text-center'>$anweshaid not found. Please enter correct anweshaid.</p>";
 		return false;
 	}
 }
@@ -246,7 +246,7 @@ function getEventAmount($ev_id){
 function updatingUser(){
 	$first_name=clean($_POST['first_name']);
 	$last_name=clean($_POST['last_name']);
-	$celestaid=clean($_POST['celestaid']);
+	$anweshaid=clean($_POST['anweshaid']);
 	$email=clean($_POST['email']);
 	$phone=clean($_POST['phone']);
 	$college=clean($_POST['college']);
@@ -260,7 +260,7 @@ function updatingUser(){
 	$price_accommodation=500;
 
 	// Get user info
-	$sql0="SELECT * from users where celestaid='$celestaid'";
+	$sql0="SELECT * from users where anweshaid='$anweshaid'";
 	$result0=query($sql0);
 	$row=fetch_array($result0);
 
@@ -294,7 +294,7 @@ function updatingUser(){
 	// if((isset($_POST['bandpass_charge'])) && isset($_POST['tshirt_charge'])){
 	// 	$total_charge=$total_charge-$price_bandass-$price_tshirt+$price_both;
 	// }
-	$user=getDetails($celestaid);
+	$user=getDetails($anweshaid);
 	$events_registered=json_decode($user['events_registered']);
 	$update_user_events_registered=array();
 	$paidEvents=array();
@@ -328,7 +328,7 @@ function updatingUser(){
 						$add_event['cap_name']=$cap_name;
 					}
 					$update_user_events_registered[]=$add_event;
-					updateEventTable($ev_id,$ev_amount,$celestaid,$team_name);
+					updateEventTable($ev_id,$ev_amount,$anweshaid,$team_name);
 				}else{
 					$update_user_events_registered[]=$event;
 				}
@@ -343,7 +343,7 @@ function updatingUser(){
 	$qrcode=$user['qrcode'];
 	$subject="Celesta Account";
 	$msg="<p>
-		Your Celesta Id is ".$celestaid.".<br>
+		Your Celesta Id is ".$anweshaid.".<br>
 		Total Amount to pay is: Rs. $total_charge<br>
 		You qr code is <img src='$qrcode'/> <a href='$qrcode'>click here</a><br/>
 		</p>
@@ -364,11 +364,11 @@ function updatingUser(){
 		$name=$first_name." ".$last_name;
 		$amount_paid=$amount_paid+$price_accommodation;
 
-		bookAppointment($celestaid,$gender,$name,$phone,$price_accommodation,$email,$qrcode);
+		bookAppointment($anweshaid,$gender,$name,$phone,$price_accommodation,$email,$qrcode);
 	}
 
 	if(isset($_POST['pay_all_accommodation_charge'])){
-		$sql1="SELECT * FROM accommodation WHERE celestaid='$celestaid'";
+		$sql1="SELECT * FROM accommodation WHERE anweshaid='$anweshaid'";
 		$result1=query($sql1);
 		$row1=fetch_array($result1);
 		$pay=0;
@@ -383,31 +383,31 @@ function updatingUser(){
 		}
 		$amount_paid=$amount_paid+$pay;
 		$total_charge=$total_charge+$pay;
-		payAccommodation($celestaid,$pay,$row1['email']);
+		payAccommodation($anweshaid,$pay,$row1['email']);
 	}
 
 	$update_user_events_registered=json_encode($update_user_events_registered);
-	$sql="UPDATE users set first_name='$first_name', last_name='$last_name',phone='$phone',college='$college',total_charge=$total_charge,tshirt_charge=$tshirt_charge,events_charge=$events_charge,registration_charge=$registration_charge, events_registered='$update_user_events_registered',amount_paid=$amount_paid, registration_desk=1, iit_patna=$college_stud, accommodation_charge=$accommodation_charge WHERE celestaid='$celestaid'";
+	$sql="UPDATE users set first_name='$first_name', last_name='$last_name',phone='$phone',college='$college',total_charge=$total_charge,tshirt_charge=$tshirt_charge,events_charge=$events_charge,registration_charge=$registration_charge, events_registered='$update_user_events_registered',amount_paid=$amount_paid, registration_desk=1, iit_patna=$college_stud, accommodation_charge=$accommodation_charge WHERE anweshaid='$anweshaid'";
 	$result=query($sql);
 	confirm($result);
 
-	echo "<h3 class='bg-success text-center'>$celestaid successfully registered. Pay amount: Rs. $total_charge </h3>";
+	echo "<h3 class='bg-success text-center'>$anweshaid successfully registered. Pay amount: Rs. $total_charge </h3>";
 
 }
 
-function payAccommodation($celestaid,$pay,$email){
-	$sql="UPDATE accommodation set amount_paid=$pay where celestaid='$celestaid'";
+function payAccommodation($anweshaid,$pay,$email){
+	$sql="UPDATE accommodation set amount_paid=$pay where anweshaid='$anweshaid'";
 	$result=query($sql);
 	confirm($result);
 
-	$message="<p> Hi $celestaid, you have successfully paid your accommodation charge.<br>
+	$message="<p> Hi $anweshaid, you have successfully paid your accommodation charge.<br>
 	Amount paid for accommodation is : Rs. $pay <br>";
 	$subject="Celesta2k19 Accommodation Payment";
 	$headers="From: celesta19iitp@gmail.com";
 	send_email($email,$subject,$message,$headers);
 }
 
-function updateEventTable($ev_id,$ev_amount,$celestaid,$team_event){
+function updateEventTable($ev_id,$ev_amount,$anweshaid,$team_event){
 
 	$sql="SELECT * FROM events WHERE ev_id='$ev_id'";
 	$result=query($sql);
@@ -420,7 +420,7 @@ function updateEventTable($ev_id,$ev_amount,$celestaid,$team_event){
 
 		$updt=array();
 		if(empty($team_event)){
-			$get_celestaid=$reg->celestaid;
+			$get_anweshaid=$reg->anweshaid;
 			$name=$reg->name;
 			$time=$reg->time;
 			$phone=$reg->phone;
@@ -429,10 +429,10 @@ function updateEventTable($ev_id,$ev_amount,$celestaid,$team_event){
 			$updt['name']=$name;
 			$updt['phone']=$phone;
 			$updt['amount']=$amount;
-			$updt['celestaid']=$celestaid;
+			$updt['anweshaid']=$anweshaid;
 			echo "6-";
 
-			if($get_celestaid==$celestaid){
+			if($get_anweshaid==$anweshaid){
 				$updt['amount']=$ev_amount;
 			}
 
@@ -441,92 +441,92 @@ function updateEventTable($ev_id,$ev_amount,$celestaid,$team_event){
 			$amount=$reg->amount;
 			$cap_name=$reg->cap_name;
 			$cap_phone=$reg->cap_phone;
-			$cap_celestaid=$reg->celestaid;
+			$cap_anweshaid=$reg->anweshaid;
 			$team_name=$reg->team_name;
 			$cap_email=$reg->cap_email;
 
 			$mem1_name=$reg->mem1_name;
 			$mem1_email=$reg->mem1_email;
 			$mem1_phone=$reg->mem1_phone;
-			$mem1_celestaid=$reg->mem1_celestaid;
+			$mem1_anweshaid=$reg->mem1_anweshaid;
 
 			$mem2_name=$reg->mem2_name;
 			$mem2_email=$reg->mem2_email;
 			$mem2_phone=$reg->mem2_phone;
-			$mem2_celestaid=$reg->mem2_celestaid;
+			$mem2_anweshaid=$reg->mem2_anweshaid;
 
 			$mem3_name=$reg->mem3_name;
 			$mem3_email=$reg->mem3_email;
 			$mem3_phone=$reg->mem3_phone;
-			$mem3_celestaid=$reg->mem3_celestaid;
+			$mem3_anweshaid=$reg->mem3_anweshaid;
 
 			$mem4_name=$reg->mem4_name;
 			$mem4_email=$reg->mem4_email;
 			$mem4_phone=$reg->mem4_phone;
-			$mem4_celestaid=$reg->mem4_celestaid;
+			$mem4_anweshaid=$reg->mem4_anweshaid;
 
 			$mem5_name=$reg->mem5_name;
 			$mem5_email=$reg->mem5_email;
 			$mem5_phone=$reg->mem5_phone;
-			$mem5_celestaid=$reg->mem5_celestaid;
+			$mem5_anweshaid=$reg->mem5_anweshaid;
 
-			$mem_celestaid=array();
+			$mem_anweshaid=array();
 
 			// Updating datas
 			$updt['cap_name']=$cap_name;
 			$updt['time']=$time;
 			$updt['amount']=$amount;
-			$updt['cap_celestaid']=$cap_celestaid;
+			$updt['cap_anweshaid']=$cap_anweshaid;
 			$updt['team_name']=$team_name;
 			$updt['cap_phone']=$cap_phone;
 			$updt['cap_email']=$cap_email;
 
-			$mem_celestaid[]=$celestaid;
+			$mem_anweshaid[]=$anweshaid;
 
-			if(!empty($mem1_celestaid)){
+			if(!empty($mem1_anweshaid)){
 				$updt['mem1_name']=$mem1_name;
 				$updt['mem1_email']=$mem1_email;
-				$updt['mem1_celestaid']=$mem1_celestaid;
+				$updt['mem1_anweshaid']=$mem1_anweshaid;
 				$updt['mem1_phone']=$mem1_phone;
-				$mem_celestaid[]=$mem1_celestaid;
+				$mem_anweshaid[]=$mem1_anweshaid;
 			}
 
-			if(!empty($mem2_celestaid)){
+			if(!empty($mem2_anweshaid)){
 				$updt['mem2_name']=$mem2_name;
 				$updt['mem2_email']=$mem2_email;
-				$updt['mem2_celestaid']=$mem2_celestaid;
+				$updt['mem2_anweshaid']=$mem2_anweshaid;
 				$updt['mem2_phone']=$mem2_phone;
-				$mem_celestaid[]=$mem2_celestaid;
+				$mem_anweshaid[]=$mem2_anweshaid;
 			}
 
-			if(!empty($mem3_celestaid)){
+			if(!empty($mem3_anweshaid)){
 				$updt['mem3_name']=$mem3_name;
 				$updt['mem3_email']=$mem3_email;
-				$updt['mem3_celestaid']=$mem3_celestaid;
+				$updt['mem3_anweshaid']=$mem3_anweshaid;
 				$updt['mem3_phone']=$mem3_phone;
-				$mem_celestaid[]=$mem3_celestaid;
+				$mem_anweshaid[]=$mem3_anweshaid;
 			}
 
-			if(!empty($mem4_celestaid)){
+			if(!empty($mem4_anweshaid)){
 				$updt['mem4_name']=$mem4_name;
 				$updt['mem4_email']=$mem4_email;
-				$updt['mem4_celestaid']=$mem4_celestaid;
+				$updt['mem4_anweshaid']=$mem4_anweshaid;
 				$updt['mem4_phone']=$mem4_phone;
-				$mem_celestaid[]=$mem4_celestaid;
+				$mem_anweshaid[]=$mem4_anweshaid;
 			}
 
-			if(!empty($mem5_celestaid)){
+			if(!empty($mem5_anweshaid)){
 				$updt['mem5_name']=$mem5_name;
 				$updt['mem5_email']=$mem5_email;
-				$updt['mem5_celestaid']=$mem5_celestaid;
+				$updt['mem5_anweshaid']=$mem5_anweshaid;
 				$updt['mem5_phone']=$mem5_phone;
-				$mem_celestaid[]=$mem5_celestaid;
+				$mem_anweshaid[]=$mem5_anweshaid;
 			}
 
 			// If id found or matched
-			if(in_array($celestaid,$mem_celestaid)){
+			if(in_array($anweshaid,$mem_anweshaid)){
 				$updt['amount']=$ev_amount;
-				foreach($mem_celestaid as $clst){
+				foreach($mem_anweshaid as $clst){
 					updateOtherUsers($ev_id,$ev_amount,$clst);
 				}
 			}
@@ -545,10 +545,10 @@ function updateEventTable($ev_id,$ev_amount,$celestaid,$team_event){
 
 }
 
-function updateOtherUsers($evid,$ev_amount,$celestaid){
+function updateOtherUsers($evid,$ev_amount,$anweshaid){
 	// To update other users data
 
-	$sql="SELECT events_registered, email, qrcode FROM users WHERE celestaid='$celestaid'";
+	$sql="SELECT events_registered, email, qrcode FROM users WHERE anweshaid='$anweshaid'";
 	$result=query($sql);
 	if(row_count($result)==1){
 
@@ -585,16 +585,16 @@ function updateOtherUsers($evid,$ev_amount,$celestaid){
 		}
 
 		$updated_registered_events=json_encode($updated_registered_events);
-		$sql1="UPDATE users SET events_registered='$updated_registered_events' WHERE celestaid='$celestaid'";
+		$sql1="UPDATE users SET events_registered='$updated_registered_events' WHERE anweshaid='$anweshaid'";
 		$result1=query($sql1);
 		confirm($result1);
 
 		$subject="Celesta Event Registrations Payment";
 		$msg="<p>
-			Your Celesta Id is ".$celestaid.". You have successfully paid for <b> $evid - $say_name </b>.
+			Your Celesta Id is ".$anweshaid.". You have successfully paid for <b> $evid - $say_name </b>.
 			<br>
 			Amount paid is: $ev_amount<br>
-			Paid By: $celestaid<br>
+			Paid By: $anweshaid<br>
 			You qr code is <img src='$qrcode'/> <a href='$qrcode'>click here</a><br/>
 			</p>
 		";
@@ -613,7 +613,7 @@ function total_register(){
 		redirect("login.php");
 	}else{
 		//echo "Will shortly display the result";
-		$sql="SELECT first_name, last_name, college, date, celestaid, qrcode, phone,tshirt_charge,registration_charge,accommodation_charge,amount_paid,events_charge,total_charge FROM users WHERE registration_desk=1";
+		$sql="SELECT first_name, last_name, college, date, anweshaid, qrcode, phone,tshirt_charge,registration_charge,accommodation_charge,amount_paid,events_charge,total_charge FROM users WHERE registration_desk=1";
 		$result=query($sql);
 		$permit=getPermit();
 		$count=0;
@@ -624,7 +624,7 @@ function total_register(){
 				$online=$row['amount_paid']-$row['total_charge'];
     			echo "<tr>
 						<th scope='row'>".$count."</th>
-	      				<td>".$row['celestaid']."</td>
+	      				<td>".$row['anweshaid']."</td>
 	      				<td>".$row['date']."</td>
 	      				<td>".$row['first_name']." ".$row['last_name']."</td>
 	      				<td>".$row['college']."</td>
@@ -645,12 +645,12 @@ function total_register(){
 }
 
 //Attaching the qr code generator
-function generateQRCode($celestaid,$first_name,$last_name){
+function generateQRCode($anweshaid,$first_name,$last_name){
 	include("./../user/functions/qrCodeGenerator/qrlib.php");
-	QRcode::png($celestaid."/".$first_name."/".$last_name,"./../user/assets/qrcodes/".$celestaid.".png","H","10","10");
+	QRcode::png($anweshaid."/".$first_name."/".$last_name,"./../user/assets/qrcodes/".$anweshaid.".png","H","10","10");
 }
 
-//Registers users who donot have celestaid
+//Registers users who donot have anweshaid
 function new_register(){
 	$permit=getPermit();
 	if(!registrar_logged_in()){
@@ -759,14 +759,14 @@ function new_register_user($first_name,$last_name,$phone,$college,$email,$passwo
 		$registrar_name=$_COOKIE['registrar'];
 	}
 	$password=md5($password);
-	$celestaid=getCelestaId();
-	generateQRCode($celestaid,$first_name,$last_name);
-	$qrcode="https://celesta.org.in//backend/user/assets/qrcodes/".$celestaid.".png";
+	$anweshaid=getanweshaid();
+	generateQRCode($anweshaid,$first_name,$last_name);
+	$qrcode="https://celesta.org.in//backend/user/assets/qrcodes/".$anweshaid.".png";
 
 	//CONTENTS OF EMAIL
 	$subject="Celesta Account";
 	$msg="<p>
-		Your Celesta Id is ".$celestaid.". Your account has been auto activated.<br/>
+		Your Celesta Id is ".$anweshaid.". Your account has been auto activated.<br/>
 		Total Amount to pay is: Rs. $total_charge<br>
 		You qr code is <img src='$qrcode'/> <a href='$qrcode'>click here</a><br/>
 		
@@ -778,17 +778,17 @@ function new_register_user($first_name,$last_name,$phone,$college,$email,$passwo
 	if(send_email($email,$subject,$msg,$header)){
 
 		//Inserting into actual database
-		$sql1="INSERT INTO users(first_name,last_name,phone,college,email,password,celestaid,qrcode,gender,added_by,active,validation_code,tshirt_charge,total_charge,registration_charge,amount_paid,registration_desk,iit_patna, accommodation_charge) ";
-		$sql1.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$celestaid','".$qrcode."','$gender','$registrar_name',1,'0',$tshirt_charge,$total_charge,$registration_charge,$total_charge,1,$college_stud,$accommodation_charge)";
+		$sql1="INSERT INTO users(first_name,last_name,phone,college,email,password,anweshaid,qrcode,gender,added_by,active,validation_code,tshirt_charge,total_charge,registration_charge,amount_paid,registration_desk,iit_patna, accommodation_charge) ";
+		$sql1.=" VALUES('$first_name','$last_name','$phone','$college','$email','$password','$anweshaid','".$qrcode."','$gender','$registrar_name',1,'0',$tshirt_charge,$total_charge,$registration_charge,$total_charge,1,$college_stud,$accommodation_charge)";
 		$result1=query($sql1);
 		confirm($result1);
 
 		update_referral_points($referral_id);
 
-		set_message("<p class='bg-success text-center'>Please check your email to get your qrcode and celesta id. You can login now with the celesta id and the password.<br><br><br>Your Celesta id is $celestaid<br>Amount to pay is Rs. $total_charge<br> <img src='$qrcode' alt='QR Code cannot be displayed.'/> <br><br></p>");
+		set_message("<p class='bg-success text-center'>Please check your email to get your qrcode and celesta id. You can login now with the celesta id and the password.<br><br><br>Your Celesta id is $anweshaid<br>Amount to pay is Rs. $total_charge<br> <img src='$qrcode' alt='QR Code cannot be displayed.'/> <br><br></p>");
 		$name=$first_name." ".$last_name;
 		if(isset($_POST["accommodation_charge"])){
-			bookAppointment($celestaid,$gender,$name,$phone,$price_accommodation,$email,$qrcode);
+			bookAppointment($anweshaid,$gender,$name,$phone,$price_accommodation,$email,$qrcode);
 		}
 
 		return true;
@@ -797,20 +797,20 @@ function new_register_user($first_name,$last_name,$phone,$college,$email,$passwo
 	}
 }
 
-function bookAppointment($celestaid,$gender,$name,$phone,$amount_paid,$email,$qrcode){
+function bookAppointment($anweshaid,$gender,$name,$phone,$amount_paid,$email,$qrcode){
 	$date=escape(date('Y-m-d H:i:s'));
 	$no_of_days=3;
 	$day1=1;
 	$day2=1;
 	$day3=1;
 
-	$sql="INSERT INTO accommodation(celestaid,names,phone,gender,booking_date,no_of_days,day1,day2,day3,amount_paid,email) VALUES('$celestaid','$name','$phone','$gender','$date',$no_of_days,$day1,$day2,$day3,$amount_paid,'$email')";
+	$sql="INSERT INTO accommodation(anweshaid,names,phone,gender,booking_date,no_of_days,day1,day2,day3,amount_paid,email) VALUES('$anweshaid','$name','$phone','$gender','$date',$no_of_days,$day1,$day2,$day3,$amount_paid,'$email')";
 	$result=query($sql);
 	confirm($result);
 
 	$message="<p> Hi $name, you have successfully booked your accommodation for $no_of_days.<br>
 	Amount paid for accommodation is : Rs. $amount_paid <br>
-	Your celestaid is:$celestaid<br>
+	Your anweshaid is:$anweshaid<br>
 	<a href='$qrcode'><img src='$qrcode' alt='Your qr code should be shown here.' style='height:400px;width:400px'/></a>
 	</p>";
 	$subject="Celesta2k19 Accommodation Booking";
@@ -823,14 +823,14 @@ function update_referral_points($referral_id){
 	if(!refrral_id_exist($referral_id)){
 		$referral_id="CLST1504";
 	}
-	$sql = "SELECT excitons FROM ca_users WHERE celestaid='$referral_id'";
+	$sql = "SELECT excitons FROM ca_users WHERE anweshaid='$referral_id'";
 	$result = query($sql);
 	if(row_count($result)==1){
 		$row=fetch_array($result);
 		$points=$row['excitons'];
 		$points = $points + 10;
 
-		$sql1 = "UPDATE ca_users SET excitons=$points WHERE celestaid='$referral_id'";
+		$sql1 = "UPDATE ca_users SET excitons=$points WHERE anweshaid='$referral_id'";
 		$result1 = query($sql1);
 		confirm($result1);
 	}
@@ -838,7 +838,7 @@ function update_referral_points($referral_id){
 
 // To check if the user exists or not
 function refrral_id_exist($referral_id){
-	$sql = "SELECT id, active FROM ca_users WHERE celestaid ='".$referral_id."'";
+	$sql = "SELECT id, active FROM ca_users WHERE anweshaid ='".$referral_id."'";
 	$result = query($sql);
 	if(row_count($result)==1){
 		$row=fetch_array($result);
@@ -860,7 +860,7 @@ function show_ca_users(){
 	if(!registrar_logged_in()){
 		redirect("login.php");
 	}elseif(getPermit()==0 || getPermit()==3){
-		$sql="SELECT first_name, last_name, college, celestaid, phone, excitons, gravitons FROM ca_users WHERE active=1";
+		$sql="SELECT first_name, last_name, college, anweshaid, phone, score FROM ca_users WHERE active=1";
 		$result=query($sql);
 		$permit=getPermit();
 
@@ -891,8 +891,8 @@ function ca_calls(){
 }
 
 // Function to check if a ca is present or not. If present do it exists or not
-function is_ca_exist($celestaid){
-	$sql = "SELECT * FROM ca_users WHERE celestaid='$celestaid' AND active=1";
+function is_ca_exist($anweshaid){
+	$sql = "SELECT * FROM ca_users WHERE anweshaid='$anweshaid' AND active=1";
 	$result=query($sql);
 	if(row_count($result)==1){
 		return true;
@@ -903,9 +903,9 @@ function is_ca_exist($celestaid){
 
 // Function to search ca
 function search_ca(){
-	$celestaid = clean($_POST["celestaid"]);
-	if(is_ca_exist($celestaid)){
-		$_SESSION["searched_ca"]=$celestaid;
+	$anweshaid = clean($_POST["anweshaid"]);
+	if(is_ca_exist($anweshaid)){
+		$_SESSION["searched_ca"]=$anweshaid;
 		redirect("ca.php");
 	}else{
 		echo validation_errors("Record not found");
@@ -916,8 +916,8 @@ function search_ca(){
 function searched_ca(){
 	if(isset($_SESSION["searched_ca"])){
 		if(is_ca_exist($_SESSION["searched_ca"])){
-			$celestaid = $_SESSION["searched_ca"];
-			$sql="SELECT first_name, last_name, college, celestaid, phone, excitons, gravitons FROM ca_users WHERE celestaid='$celestaid'";
+			$anweshaid = $_SESSION["searched_ca"];
+			$sql="SELECT first_name, last_name, college, anweshaid, phone, score FROM ca_users WHERE anweshaid='$anweshaid'";
 			$result=query($sql);
             $row = fetch_array($result);
 			return $row;
@@ -929,11 +929,10 @@ function searched_ca(){
 	}
 }
 function update_ca(){
-	$celestaid = clean($_POST['celestaid']);
-	$excitons = (int)clean($_POST["excitons"]);
-	$gravitons = (int)clean($_POST["gravitons"]);
+	$anweshaid = clean($_POST['anweshaid']);
+	$score = (int)clean($_POST["score"]);
 
-	$sql = "UPDATE ca_users SET gravitons=$gravitons, excitons=$excitons WHERE celestaid='$celestaid'";
+	$sql = "UPDATE ca_users SET score=$score WHERE anweshaid='$anweshaid'";
 	$result = query($sql);
 	redirect('./cas.php');
 	unset($_SESSION['searched_ca']);
